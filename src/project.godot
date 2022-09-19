@@ -1,0 +1,183 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "BackForthMovement",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/BackForthMovement.gd"
+}, {
+"base": "Spatial",
+"class": "Follow",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/Follow.gd"
+}, {
+"base": "ResourceFormatLoader",
+"class": "HTerrainDataLoader",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "HTerrainDataSaver",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+}, {
+"base": "Spatial",
+"class": "LerpFollow",
+"language": "GDScript",
+"path": "res://Game/LerpFollow.gd"
+}, {
+"base": "Spatial",
+"class": "LookAt",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/LookAt.gd"
+}, {
+"base": "Spatial",
+"class": "LookAtGroup",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/LookAtGroup.gd"
+}, {
+"base": "Spatial",
+"class": "Orbiter",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/UserInput/Orbiter.gd"
+}, {
+"base": "Resource",
+"class": "PlyMesh",
+"language": "GDScript",
+"path": "res://addons/ply/resources/ply_mesh.gd"
+}, {
+"base": "Spatial",
+"class": "Shake",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/Shake.gd"
+}, {
+"base": "Spatial",
+"class": "Shaker",
+"language": "GDScript",
+"path": "res://Game/Shaker.gd"
+}, {
+"base": "TransformModifier",
+"class": "SnapToPath",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/SnapToPath.gd"
+}, {
+"base": "Spatial",
+"class": "TransformModifier",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/TransformModifier.gd"
+}, {
+"base": "Spatial",
+"class": "UniformMovement",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformMovement.gd"
+}, {
+"base": "Spatial",
+"class": "UniformRotation",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd"
+}, {
+"base": "Spatial",
+"class": "UniformTranslation",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformTranslation.gd"
+}, {
+"base": "Spatial",
+"class": "UserInput",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/TransformModifiers/UserInput/UserInput.gd"
+}, {
+"base": "Spatial",
+"class": "VCamera",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/VCameras/VCamera.gd"
+}, {
+"base": "Camera",
+"class": "VCameraBrain",
+"language": "GDScript",
+"path": "res://addons/virtualcamera/VCameraBrain.gd"
+} ]
+_global_script_class_icons={
+"BackForthMovement": "",
+"Follow": "",
+"HTerrainDataLoader": "",
+"HTerrainDataSaver": "",
+"LerpFollow": "",
+"LookAt": "",
+"LookAtGroup": "",
+"Orbiter": "",
+"PlyMesh": "",
+"Shake": "",
+"Shaker": "",
+"SnapToPath": "",
+"TransformModifier": "res://addons/virtualcamera/TransformModifiers/TransformModifier.svg",
+"UniformMovement": "",
+"UniformRotation": "",
+"UniformTranslation": "",
+"UserInput": "",
+"VCamera": "res://addons/virtualcamera/VCameras/VCamera.svg",
+"VCameraBrain": "res://addons/virtualcamera/VCameraBrain.svg"
+}
+
+[application]
+
+config/name="leafgame"
+run/main_scene="res://Main/Main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+ShowcaseSettings="*res://demo/utility/showcase_settings.gd"
+
+[display]
+
+window/size/width=800
+window/size/height=800
+window/size/resizable=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/dreadpon.spatial_gardener/plugin.cfg", "res://addons/ply/plugin.cfg", "res://addons/virtualcamera/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+Debug_StartGame={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+SkipDialogue={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_render/layer_1="World"
+3d_render/layer_2="UIOverlay"
+3d_physics/layer_1="gameplay"
+3d_physics/layer_2="painting"
+
+[mono]
+
+project/assembly_name="leafgame"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
