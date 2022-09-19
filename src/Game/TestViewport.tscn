@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://MainMenu/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Dialogue/UIOverlayCamera.cs" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/virtualcamera/TransformModifiers/UserInput/Orbiter.gd" type="Script" id=5]
 [ext_resource path="res://Game/InputController.cs" type="Script" id=6]
 [ext_resource path="res://Game/RadialCamera.cs" type="Script" id=7]
+[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=8]
 [ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" type="Script" id=52]
 
 [sub_resource type="SphereShape" id=2]
@@ -79,13 +80,15 @@ TargetOffset = Vector3( 0, 0.25, 0 )
 Shape = SubResource( 2 )
 CollisionMask = 1
 
-[node name="Camera" type="Camera" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf/Orbiter/LookAt/RadialCamera"]
-current = true
+[node name="VCamera" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf/Orbiter/LookAt/RadialCamera" groups=["vcamera"]]
+process_priority = -1000
+script = ExtResource( 8 )
+priority = 15
 far = 300.0
 
 [node name="Game" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 4 )]
 
-[node name="Node" type="Node" parent="Upscale/Viewport/Downscale/Viewport"]
+[node name="InputConstrainer" type="Node" parent="Upscale/Viewport/Downscale/Viewport"]
 script = ExtResource( 6 )
 
 [node name="UIOverlay ViewportContainer" type="ViewportContainer" parent="."]
