@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Escarpment_Terrain_Hill_Base.obj-27cb66b5b0b1fef66251e60140ae918f.mesh"
+
+[deps]
+
+files=[ "res://.import/Escarpment_Terrain_Hill_Base.obj-27cb66b5b0b1fef66251e60140ae918f.mesh" ]
+
+source_file="res://ModularTerrain/Escarpment_Terrain_Hill_Base.obj"
+dest_files=[ "res://.import/Escarpment_Terrain_Hill_Base.obj-27cb66b5b0b1fef66251e60140ae918f.mesh", "res://.import/Escarpment_Terrain_Hill_Base.obj-27cb66b5b0b1fef66251e60140ae918f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

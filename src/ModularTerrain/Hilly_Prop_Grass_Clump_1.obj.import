@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Grass_Clump_1.obj-aaac1f7b4d7413d97181df5ee6c8777d.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Grass_Clump_1.obj-aaac1f7b4d7413d97181df5ee6c8777d.mesh" ]
+
+source_file="res://ModularTerrain/Hilly_Prop_Grass_Clump_1.obj"
+dest_files=[ "res://.import/Hilly_Prop_Grass_Clump_1.obj-aaac1f7b4d7413d97181df5ee6c8777d.mesh", "res://.import/Hilly_Prop_Grass_Clump_1.obj-aaac1f7b4d7413d97181df5ee6c8777d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

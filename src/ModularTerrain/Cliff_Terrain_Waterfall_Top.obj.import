@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Terrain_Waterfall_Top.obj-2f077772c0bf88f65df8a31011b7d3ba.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Terrain_Waterfall_Top.obj-2f077772c0bf88f65df8a31011b7d3ba.mesh" ]
+
+source_file="res://ModularTerrain/Cliff_Terrain_Waterfall_Top.obj"
+dest_files=[ "res://.import/Cliff_Terrain_Waterfall_Top.obj-2f077772c0bf88f65df8a31011b7d3ba.mesh", "res://.import/Cliff_Terrain_Waterfall_Top.obj-2f077772c0bf88f65df8a31011b7d3ba.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

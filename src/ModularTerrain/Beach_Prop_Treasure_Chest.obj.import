@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Beach_Prop_Treasure_Chest.obj-08c978713f78e1e39069f34bac6b5e43.mesh"
+
+[deps]
+
+files=[ "res://.import/Beach_Prop_Treasure_Chest.obj-08c978713f78e1e39069f34bac6b5e43.mesh" ]
+
+source_file="res://ModularTerrain/Beach_Prop_Treasure_Chest.obj"
+dest_files=[ "res://.import/Beach_Prop_Treasure_Chest.obj-08c978713f78e1e39069f34bac6b5e43.mesh", "res://.import/Beach_Prop_Treasure_Chest.obj-08c978713f78e1e39069f34bac6b5e43.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

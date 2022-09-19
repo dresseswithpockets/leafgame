@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Support_Ceiling_Beam_3.obj-1c8c5313f2f2ab2b1ba50b1096f1b43c.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Support_Ceiling_Beam_3.obj-1c8c5313f2f2ab2b1ba50b1096f1b43c.mesh" ]
+
+source_file="res://ModularTerrain/Cave_Prop_Support_Ceiling_Beam_3.obj"
+dest_files=[ "res://.import/Cave_Prop_Support_Ceiling_Beam_3.obj-1c8c5313f2f2ab2b1ba50b1096f1b43c.mesh", "res://.import/Cave_Prop_Support_Ceiling_Beam_3.obj-1c8c5313f2f2ab2b1ba50b1096f1b43c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Stalagmite_Connected_Top.obj-4c75c8df57ddcde83db33dea10da000f.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Stalagmite_Connected_Top.obj-4c75c8df57ddcde83db33dea10da000f.mesh" ]
+
+source_file="res://ModularTerrain/Cave_Prop_Stalagmite_Connected_Top.obj"
+dest_files=[ "res://.import/Cave_Prop_Stalagmite_Connected_Top.obj-4c75c8df57ddcde83db33dea10da000f.mesh", "res://.import/Cave_Prop_Stalagmite_Connected_Top.obj-4c75c8df57ddcde83db33dea10da000f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

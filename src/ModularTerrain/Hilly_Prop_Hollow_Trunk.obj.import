@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Hollow_Trunk.obj-444ce30699690cdc8292e7f223a24bba.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Hollow_Trunk.obj-444ce30699690cdc8292e7f223a24bba.mesh" ]
+
+source_file="res://ModularTerrain/Hilly_Prop_Hollow_Trunk.obj"
+dest_files=[ "res://.import/Hilly_Prop_Hollow_Trunk.obj-444ce30699690cdc8292e7f223a24bba.mesh", "res://.import/Hilly_Prop_Hollow_Trunk.obj-444ce30699690cdc8292e7f223a24bba.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
