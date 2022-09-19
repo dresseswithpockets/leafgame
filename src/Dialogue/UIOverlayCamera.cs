@@ -8,7 +8,7 @@ public class UIOverlayCamera : Camera
     public override void _Ready()
     {
         var game = GetNode("%Game");
-        _mainCamera = game.GetNode<Camera>("VCameraBrain");
+        _mainCamera = game?.GetNode<Camera>("VCameraBrain");
     }
 
     public override void _Process(float delta)
