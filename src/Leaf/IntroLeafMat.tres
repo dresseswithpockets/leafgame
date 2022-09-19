@@ -1,0 +1,44 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=2]
+
+[ext_resource path="res://Leaf/LeafWind.shader" type="Shader" id=1]
+[ext_resource path="res://Leaf/map.png" type="Texture" id=2]
+[ext_resource path="res://Leaf/edge2.png" type="Texture" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=3]
+octaves = 8
+period = 28.5
+persistence = 0.282
+lacunarity = 2.08
+
+[sub_resource type="NoiseTexture" id=4]
+width = 128
+height = 128
+noise = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=2]
+octaves = 1
+period = 27.2
+persistence = 0.497
+lacunarity = 0.1
+
+[sub_resource type="NoiseTexture" id=1]
+width = 64
+height = 64
+seamless = true
+noise = SubResource( 2 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/TimeScale = 0.5
+shader_param/WindDir = Vector2( 1, 0.581 )
+shader_param/EdgeScale = Vector3( 0, 2, 0 )
+shader_param/NoiseScale = Vector3( 0, 1, 0 )
+shader_param/DirectWindNoiseOffset = Vector3( 0, -2.45, 0 )
+shader_param/DirectWindNoiseScale = Vector3( 0, 0, 0 )
+shader_param/DirectWindNoiseDir = Vector2( 0, 1 )
+shader_param/DirectWindStrength = Vector3( 0, 0.1, 0 )
+shader_param/Color = Color( 1, 1, 1, 1 )
+shader_param/EdgeMask = ExtResource( 3 )
+shader_param/WindNoise = SubResource( 1 )
+shader_param/DirectWindNoise = SubResource( 4 )
+shader_param/Albedo = ExtResource( 2 )
