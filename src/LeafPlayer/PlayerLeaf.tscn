@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://LeafPlayer/movement_wind.wav" type="AudioStream" id=1]
+[ext_resource path="res://Leaf/HouseLeafMat.tres" type="Material" id=2]
+[ext_resource path="res://Leaf/gwuh.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://LeafPlayer/PlayerLeaf.cs" type="Script" id=4]
+[ext_resource path="res://LeafPlayer/PlayerLeafShaker.cs" type="Script" id=5]
+[ext_resource path="res://LeafPlayer/PlayerLeafWind.cs" type="Script" id=6]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 26.2
+persistence = 0.217
+lacunarity = 2.72
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.2
+height = 0.2
+
+[node name="PlayerLeaf" type="KinematicBody"]
+collision_layer = 4
+script = ExtResource( 4 )
+
+[node name="Shaker" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+script = ExtResource( 5 )
+ShakeTarget = NodePath("LeafMesh")
+Noise = SubResource( 1 )
+ShakeSpeed = 1.0
+ShakeStrengthTranslation = Vector3( 0.5, 0.7, 0.5 )
+ShakeStrengthRotation = Vector3( 360, 360, 360 )
+ShakeBlendLerpT = 0.7
+StartPosition = Vector3( 0, -0.25, 0 )
+
+[node name="LeafMesh" type="MeshInstance" parent="Shaker"]
+transform = Transform( 0.003, 0, 0, 0, 0.06, 0, 0, 0, 0.003, 0, -0.25, 0 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.3, 0 )
+shape = SubResource( 2 )
+
+[node name="MovementWindPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -80.0
+autoplay = true
+bus = "PlayerWind"
+script = ExtResource( 6 )
+Low = 0.05
+High = 0.66
+LerpT = 0.5
