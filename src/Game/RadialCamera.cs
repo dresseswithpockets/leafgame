@@ -8,11 +8,11 @@ public class RadialCamera : Spatial
     [Export] public Shape Shape;
     [Export(PropertyHint.Layers3dPhysics)] public uint CollisionMask;
 
-    private Camera _camera;
+    private Spatial _camera;
 
     public override void _Ready()
     {
-        this.TryGetChild(out _camera);
+        _camera = GetChild<Spatial>(0);
     }
 
     public override void _PhysicsProcess(float delta)
