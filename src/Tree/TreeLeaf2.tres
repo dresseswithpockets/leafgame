@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Tree/Sway.tres" type="Shader" id=1]
+[ext_resource path="res://Tree/Leaf2.tres" type="Texture" id=2]
+[ext_resource path="res://Tree/SwayNoise.tres" type="Texture" id=3]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/sway = 0.15
+shader_param/sway_ = 0.34
+shader_param/sway_pow = 1.3
+shader_param/sway_noise_sampeling_scale = 0.12
+shader_param/sway_time_scale = 0.05
+shader_param/sway_dir = Vector3( 1, 0, 1 )
+shader_param/metallic = 1.0
+shader_param/color = Color( 0.501961, 0.501961, 0.501961, 1 )
+shader_param/sway_noise = ExtResource( 3 )
+shader_param/albedo = ExtResource( 2 )
