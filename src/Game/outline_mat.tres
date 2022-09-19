@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Game/outline.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/edge_color = Color( 0, 0, 0, 1 )
+shader_param/threshold = 0.5
+shader_param/blend = 0.1
+shader_param/enable_depth_pass = true
+shader_param/threshold_depth = -1.5
+shader_param/blend_depth = 0.1
+shader_param/distance_fade_length = 20.0
+shader_param/distance_fade_blend = 15.0

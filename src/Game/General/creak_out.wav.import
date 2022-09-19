@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/creak_out.wav-c6c4c3d94363731e8cb390f07b97ecbe.sample"
+
+[deps]
+
+source_file="res://Game/General/creak_out.wav"
+dest_files=[ "res://.import/creak_out.wav-c6c4c3d94363731e8cb390f07b97ecbe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
