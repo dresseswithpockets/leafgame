@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Dialogue/Dialogue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Dialogue/house1intro/intro1.tres" type="Resource" id=2]
+[ext_resource path="res://Dialogue/house1intro/intro2.tres" type="Resource" id=3]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.767841 )
+
+[node name="Dialogue" parent="." instance=ExtResource( 1 )]
+Pages = [ ExtResource( 2 ), ExtResource( 3 ) ]
+AutoPlay = true
+Billboard = true
