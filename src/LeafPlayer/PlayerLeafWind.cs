@@ -12,7 +12,7 @@ public class PlayerLeafWind : AudioStreamPlayer, IPlayerEvents
     [Export(PropertyHint.Range, "0.0,1.0")]
     public float LerpT = 1f;
 
-    public void Speed(float speed, float maxSpeed)
+    public void GroundSpeed(float speed, float maxSpeed)
     {
         var frac = Mathf.Clamp(speed / maxSpeed, 0f, 1f);
         var current = GD.Db2Linear(VolumeDb);

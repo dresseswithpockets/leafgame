@@ -39,7 +39,7 @@ public class PlayerLeafShaker : Spatial, IPlayerEvents
         target.Rotation = targetRotation;
     }
 
-    public void Speed(float speed, float maxSpeed)
+    public void GroundSpeed(float speed, float maxSpeed)
     {
         ShakeBlend = Mathf.Lerp(ShakeBlend, Mathf.Clamp(speed / maxSpeed, 0f, 1f), ShakeBlendLerpT);
     }
