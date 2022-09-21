@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://MainMenu/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Dialogue/UIOverlayCamera.cs" type="Script" id=2]
@@ -8,7 +8,13 @@
 [ext_resource path="res://Game/InputController.cs" type="Script" id=6]
 [ext_resource path="res://Game/RadialCamera.cs" type="Script" id=7]
 [ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=8]
+[ext_resource path="res://WindRing/WindRing.tscn" type="PackedScene" id=9]
+[ext_resource path="res://LeafPlayer/VelocityBox.cs" type="Script" id=10]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/Follow.gd" type="Script" id=12]
 [ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" type="Script" id=52]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.199634
 
 [sub_resource type="SphereShape" id=2]
 radius = 0.199634
@@ -52,11 +58,54 @@ render_target_update_mode = 3
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 
+[node name="Follow" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03161, -0.280971, -6.25911 )
+script = ExtResource( 12 )
+follow_target = NodePath("../PlayerLeaf/Follower")
+follow_lerp_t = 0.1
+follow_offset = Vector3( 0, 0.25, 0 )
+
+[node name="LookAt" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/Follow"]
+transform = Transform( 0.707107, -0.0312195, 0.706417, 1.49012e-08, 0.999025, 0.0441511, -0.707106, -0.0312195, 0.706418, 0, 0, 0 )
+script = ExtResource( 52 )
+look_at_target = NodePath("../../PlayerLeaf")
+look_at_lerp_t = 0.1
+look_at_offset = Vector3( 0, 0.25, 0 )
+
+[node name="RadialCamera" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/Follow/LookAt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.294685, 0.447578 )
+script = ExtResource( 7 )
+Target = NodePath("../../../PlayerLeaf")
+TargetOffset = Vector3( 0, 0.25, 0 )
+Shape = SubResource( 3 )
+CollisionMask = 1
+
+[node name="GlideCamera" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/Follow/LookAt/RadialCamera" groups=["vcamera"]]
+process_priority = -1000
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.294685, -0.447578 )
+script = ExtResource( 8 )
+priority = 16
+enabled = false
+transition_time = 0.25
+transition_ease = 1.0
+far = 300.0
+
 [node name="PlayerLeaf" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03161, -0.530971, -6.25911 )
-MaxSpeed = 2.0
-Accel = 2.5
-Decel = -1.0
+MaxGroundSpeed = 2.0
+GroundAccel = 4.0
+GroundDecel = -2.0
+MinGlidePower = 2.0
+GlidePowerDecelRate = 2.0
+MinCameraDistance = 0.45
+MaxCameraDistance = 1.0
+GlideMinPitch = -0.6
+GlideMaxPitch = 0.6
+GlideYawSpeed = 0.4
+GroundCamera = NodePath("Orbiter/LookAt/RadialCamera/GroundCamera")
+GroundCameraOrbiter = NodePath("Orbiter")
+GlideCameraFollow = NodePath("Follower")
+GlideCamera = NodePath("../Follow/LookAt/RadialCamera/GlideCamera")
 
 [node name="Orbiter" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf"]
 script = ExtResource( 5 )
@@ -67,6 +116,7 @@ orbit_radii = Vector3( 0.25, 0.45, 0.25 )
 orbit_heights = Vector3( 0.525, 0.3, 0.075 )
 
 [node name="LookAt" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf/Orbiter"]
+transform = Transform( 0.435844, 0, -0.900022, 0, 1, 0, 0.900022, 0, 0.435844, 0, 0, 0 )
 script = ExtResource( 52 )
 look_at_target = NodePath("../..")
 look_at_lerp_t = 0.5
@@ -80,16 +130,39 @@ TargetOffset = Vector3( 0, 0.25, 0 )
 Shape = SubResource( 2 )
 CollisionMask = 1
 
-[node name="VCamera" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf/Orbiter/LookAt/RadialCamera" groups=["vcamera"]]
+[node name="GroundCamera" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf/Orbiter/LookAt/RadialCamera" groups=["vcamera"]]
 process_priority = -1000
 script = ExtResource( 8 )
 priority = 15
+transition_ease = 1.0
 far = 300.0
 
+[node name="VelocityBox" type="CSGBox" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279058, 0 )
+visible = false
+width = 0.05
+height = 0.05
+depth = 0.1
+script = ExtResource( 10 )
+MinDepth = 0.05
+MaxDepth = 1.0
+
+[node name="Follower" type="Spatial" parent="Upscale/Viewport/Downscale/Viewport/PlayerLeaf"]
+
 [node name="Game" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 
 [node name="InputConstrainer" type="Node" parent="Upscale/Viewport/Downscale/Viewport"]
 script = ExtResource( 6 )
+
+[node name="WindRing" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 9 )]
+transform = Transform( 0.909795, -0.107803, 0.400814, 0, 0.965681, 0.259729, -0.415058, -0.2363, 0.878572, -2.06118, 0, -6.28119 )
+
+[node name="WindRing2" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 9 )]
+transform = Transform( 0.668524, -0.170931, 0.72378, -0.105509, 0.941584, 0.319823, -0.736168, -0.290174, 0.611437, 1.94593, 2.78825, -0.993933 )
+
+[node name="WindRing3" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 9 )]
+transform = Transform( -0.237994, -0.336181, 0.911231, -0.105509, 0.941584, 0.319823, -0.965519, -0.020027, -0.259562, 9.54301, 6.10092, 1.44138 )
 
 [node name="UIOverlay ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
