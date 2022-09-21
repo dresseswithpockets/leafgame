@@ -1,0 +1,25 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+uniform float SpinRate;
+uniform float SpinAmplitude;
+uniform float WobbleRate;
+uniform float WobbleAmplitude;
+uniform sampler2D Albedo : hint_albedo;
+uniform vec4 Color : hint_color;
+
+void fragment() {
+    ALBEDO = Color.rgb;
+    ALPHA = Color.a;
+}
+
+void vertex() {
+    vec3 vert = VERTEX;
+    vert.x += vert.x * WobbleAmplitude * sin(TIME * WobbleRate);
+    vert.z += vert.z * WobbleAmplitude * sin(TIME * WobbleRate);
+    vert.x += SpinAmplitude * cos(TIME * SpinRate);
+    vert.z += SpinAmplitude * sin(TIME * SpinRate);
+    VERTEX = vert;
+}"

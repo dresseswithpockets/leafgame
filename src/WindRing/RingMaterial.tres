@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://WindRing/RingShader.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/SpinRate = 2.0
+shader_param/SpinAmplitude = 0.05
+shader_param/WobbleRate = 5.0
+shader_param/WobbleAmplitude = 0.05
+shader_param/Color = Color( 1, 1, 1, 0.223529 )
