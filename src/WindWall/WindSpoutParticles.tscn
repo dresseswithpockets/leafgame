@@ -4,18 +4,23 @@
 
 [sub_resource type="Gradient" id=43394]
 offsets = PoolRealArray( 0, 0.188119, 0.787129, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 0.517647, 0.333333, 0.662745, 1, 0.517647, 0.333333, 0.662745, 1, 0.517647, 0.333333, 0.662745, 0 )
+colors = PoolColorArray( 0, 0, 0, 0, 0.517647, 0.333333, 0.662745, 0.380392, 0.517647, 0.333333, 0.662745, 0.317647, 0.517647, 0.333333, 0.662745, 0 )
 
 [sub_resource type="GradientTexture" id=43395]
 gradient = SubResource( 43394 )
 
 [sub_resource type="ParticlesMaterial" id=43392]
 lifetime_randomness = 0.25
-emission_shape = 1
-emission_sphere_radius = 2.0
+emission_shape = 5
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 2.5
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 1, 0, 0 )
+flag_align_y = true
 spread = 5.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 5.0
+radial_accel = 4.0
 scale_random = 0.3
 color = Color( 0.517647, 0.333333, 0.662745, 1 )
 color_ramp = SubResource( 43395 )
@@ -24,6 +29,10 @@ color_ramp = SubResource( 43395 )
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="QuadMesh" id=43397]
