@@ -35,7 +35,7 @@ ShakeBlendLerpT = 0.7
 StartPosition = Vector3( 0, -0.25, 0 )
 
 [node name="LeafMesh" type="MeshInstance" parent="Shaker"]
-transform = Transform( 0.003, 0, 0, 0, 0.06, 0, 0, 0, 0.003, 0, -0.25, 0 )
+transform = Transform( 0.005, 0, 0, 0, 0.1, 0, 0, 0, 0.005, 0, -0.25, 0 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
