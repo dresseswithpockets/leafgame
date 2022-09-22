@@ -8,7 +8,7 @@ public class Game : Spatial
     public bool ShouldMoveOverlayCamera;
     public Camera CameraBrain;
     
-    private PlayerSpatial _playerSpatial;
+    public PlayerSpatial PlayerSpatial;
     private Spatial _gameStartCamera;
     private TreeSway _tree;
     private AnimationPlayer _branchAnimator;
@@ -28,7 +28,7 @@ public class Game : Spatial
 
     public override void _Ready()
     {
-        _playerSpatial = GetNode<PlayerSpatial>("%PlayerSpatial");
+        PlayerSpatial = GetNode<PlayerSpatial>("%PlayerSpatial");
         _gameStartCamera = GetNode<Spatial>("%VCamera GameStart");
         CameraBrain = GetNode<Camera>("%VCameraBrain");
         _tree = GetNode<TreeSway>("%Tree");
@@ -40,7 +40,7 @@ public class Game : Spatial
         
         // if allow input is already set to true, then assume that we want to debug the player
         if (InputController.Instance.AllowInput)
-            _playerSpatial.GiveControl();
+            PlayerSpatial.GiveControl();
     }
 
     public void StartGame()
@@ -52,7 +52,7 @@ public class Game : Spatial
     public async void StartHouseSequence(string _)
     {
         // begins the house dialogue sequence and other character animations
-        _playerSpatial.PauseControl();
+        PlayerSpatial.PauseControl();
         await this.AwaitTimer(1f);
         //_house1Dialogue.StartPage();
         Main.Instance.SetupDialogue(_house1DialogueSequenceName);
@@ -80,8 +80,8 @@ public class Game : Spatial
         lastCamera?.Set("enabled", false);
         // ShouldMoveOverlayCamera = true;
         
-        _playerSpatial.SetCameraToCurrentCameraRotation();
-        _playerSpatial.GiveControl();
+        PlayerSpatial.SetCameraToCurrentCameraRotation();
+        PlayerSpatial.GiveControl();
     }
 
     public override void _Process(float delta)

@@ -3,11 +3,13 @@ using System;
 
 public class PlayerSpatial : Spatial
 {
+    public PlayerLeaf PlayerLeaf;
     private Spatial _groundCamera;
     private Spatial _orbiter;
     
     public override void _Ready()
     {
+        PlayerLeaf = GetNode<PlayerLeaf>("PlayerLeaf");
         _groundCamera = GetNode<Spatial>("%GroundCamera");
         _orbiter = GetNode<Spatial>("PlayerLeaf/Orbiter");
     }
