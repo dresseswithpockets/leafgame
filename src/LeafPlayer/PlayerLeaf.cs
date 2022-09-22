@@ -149,8 +149,8 @@ public class PlayerLeaf : KinematicBody
             _glideVelocity = new Basis(new Vector3(_glidePitch, _glideYaw, 0f)).Xform(Vector3.Forward) * _glidePower;
         }
 
-        // clamp our velocity to our current glide power
-        //_glideVelocity = _glideVelocity.Normalized() * _glidePower;
+        // make sure our velocity magnitude is always capped to our current power
+        _glideVelocity = _glideVelocity.Normalized() * _glidePower;
 
         if (_glideCooldownTimer < GlidePowerDecelCooldown)
             _glideCooldownTimer += delta;
