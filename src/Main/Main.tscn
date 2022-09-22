@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://MainMenu/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu/Menu.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Game/Game.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MainMenu/trioamb.wav" type="AudioStream" id=5]
 [ext_resource path="res://Dialogue/UIOverlayCamera.cs" type="Script" id=6]
+[ext_resource path="res://Dialogue/DialogueManager.cs" type="Script" id=8]
+[ext_resource path="res://Dialogue/Dialogue.theme" type="Theme" id=9]
+[ext_resource path="res://Dialogue/AudioPlayer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Dialogue/house1intro/house1intro.tres" type="Resource" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -17,6 +21,10 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
 _busName = "Master"
+_audioPlayer = ExtResource( 10 )
+_sequences = {
+"house1intro": ExtResource( 11 )
+}
 
 [node name="Upscale" type="ViewportContainer" parent="."]
 anchor_right = 1.0
@@ -50,10 +58,29 @@ audio_listener_enable_3d = true
 
 [node name="Game" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 4 )]
 unique_name_in_owner = true
+_house1DialogueSequenceName = "house1intro"
 
 [node name="Menu" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
 self_modulate = Color( 1, 1, 1, 0.894118 )
+
+[node name="DialogueView" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueView"]
+unique_name_in_owner = true
+anchor_left = 0.05
+anchor_top = 0.8
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
+mouse_filter = 2
+theme = ExtResource( 9 )
 
 [node name="MenuLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -71,7 +98,10 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="UIOverlay Camera" type="Camera" parent="UIOverlay ViewportContainer/Viewport"]
-transform = Transform( 0.910943, 0.0213387, -0.411981, 0, 0.998661, 0.051726, 0.412533, -0.0471194, 0.909723, -23.064, 5.22494, 35.9767 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 50 )
 cull_mask = 2
 environment = SubResource( 1 )
 script = ExtResource( 6 )
+
+[node name="DialogueManager" type="Spatial" parent="UIOverlay ViewportContainer/Viewport/UIOverlay Camera"]
+script = ExtResource( 8 )
