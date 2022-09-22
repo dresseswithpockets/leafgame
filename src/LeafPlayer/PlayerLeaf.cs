@@ -31,11 +31,13 @@ public class PlayerLeaf : KinematicBody
     [Export] public NodePath GroundCamera;
     [Export] public NodePath GroundCameraOrbiter;
     [Export] public NodePath GlideCameraFollow;
+    [Export] public NodePath GlideCameraFollowRot;
     [Export] public NodePath GlideCamera;
 
     private Spatial _groundCameraOrbiter;
     private Spatial _groundCamera;
     private Spatial _glideCameraFollow;
+    private Spatial _glideCameraFollowRot;
     private Spatial _glideCamera;
     private bool _gliding;
     private Vector3 _wishDir;
@@ -56,6 +58,7 @@ public class PlayerLeaf : KinematicBody
     {
         _groundCamera = GetNode<Spatial>(GroundCamera);
         _glideCameraFollow = GetNode<Spatial>(GlideCameraFollow);
+        _glideCameraFollowRot = GetNode<Spatial>(GlideCameraFollowRot);
         _glideCamera = GetNode<Spatial>(GlideCamera);
         _glidePower = MinGlidePower;
         _groundCameraOrbiter = GetNode<Spatial>(GroundCameraOrbiter);
@@ -127,7 +130,7 @@ public class PlayerLeaf : KinematicBody
         }
 
         // clamp our velocity to our current glide power
-        _glideVelocity = _glideVelocity.Normalized() * _glidePower;
+        //_glideVelocity = _glideVelocity.Normalized() * _glidePower;
 
         if (_glideCooldownTimer < GlidePowerDecelCooldown)
             _glideCooldownTimer += delta;
@@ -166,12 +169,19 @@ public class PlayerLeaf : KinematicBody
         _glideVelocity = MoveAndSlide(_glideVelocity, Vector3.Up);
         
         // adjust our camera to always be behind our player after moving, based on the direction they're moving
-        var inverseCameraDir = -_glideVelocity.Normalized();
-        var glideCameraTransform = _glideCameraFollow.Transform;
+        // var inverseCameraDir = -_glideVelocity.Normalized();
+        
         var glidePowerRatio = (_glidePower - MinGlidePower) / (MaxGlidePower - MinGlidePower);
+        _glideCameraFollow.Translation =
+            new Vector3(-Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio), 0, Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio));
+
+        _glideCameraFollowRot.Rotation = new Vector3(_glidePitch, _glideYaw, 0f);
+        
+        /*var glideCameraTransform = _glideCameraFollow.Transform;
+        glideCameraTransform.basis = Basis.Identity;
         glideCameraTransform.origin =
-            inverseCameraDir * Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio);
-        _glideCameraFollow.Transform = glideCameraTransform;
+            inverseCameraDir * ;
+        _glideCameraFollow.Transform = glideCameraTransform;*/
         
         // grab our corrected pitch and yaw after moving
         {
@@ -198,6 +208,8 @@ public class PlayerLeaf : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
+        if (!InputController.Instance.CanInput) return;
+        
         _wishDir = Vector3.Zero;
         if (Input.MouseMode == Input.MouseModeEnum.Captured)
         {
