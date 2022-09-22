@@ -22,7 +22,7 @@ data = PoolVector3Array( 0.8089, 0, 1.1229, 0.8135, 0, -1.1056, -0.7813, 0, -1.1
 
 [node name="House1" type="MeshInstance"]
 mesh = ExtResource( 1 )
-skeleton = NodePath("../Island")
+skeleton = NodePath("")
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
