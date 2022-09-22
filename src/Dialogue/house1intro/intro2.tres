@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource( 1 )
 Mood = "Default"
-Speed = 15.0
-NoisePeriod = 3.0
-Text = "This worked very well (:"
+Speed = 20.0
+NoisePeriod = 2.0
+Text = "The winds have been bringing a lot of leaves like you to this island... I'm not sure why"
+EnableCamera = true
+CameraName = "%OverheadCamera1"
