@@ -145,6 +145,7 @@ public class PlayerLeaf : KinematicBody
             _glidePitch += _wishDir.z * GlidePitchSpeed * Mathf.Pi * delta;
             _glidePitch = Mathf.Clamp(_glidePitch, GlideMinPitch, GlideMaxPitch);
             _glideYaw += -_wishDir.x * GlideYawSpeed * Mathf.Pi * delta;
+            _glideYaw = Mathf.Wrap(_glideYaw, -Mathf.Tau, Mathf.Tau);
             _glideVelocity = new Basis(new Vector3(_glidePitch, _glideYaw, 0f)).Xform(Vector3.Forward) * _glidePower;
         }
 
