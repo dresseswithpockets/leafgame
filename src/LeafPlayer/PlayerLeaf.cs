@@ -187,34 +187,19 @@ public class PlayerLeaf : KinematicBody
         }
 
         _glideVelocity = MoveAndSlide(_glideVelocity, Vector3.Up);
-        
-        // adjust our camera to always be behind our player after moving, based on the direction they're moving
-        // var inverseCameraDir = -_glideVelocity.Normalized();
-        
+
         var glidePowerRatio = (_glidePower - MinGlidePower) / (MaxGlidePower - MinGlidePower);
         _glideCameraFollow.Translation =
-            new Vector3(-Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio), 0, Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio));
-
+            new Vector3(-Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio), 0,
+                Mathf.Lerp(MinCameraDistance, MaxCameraDistance, glidePowerRatio));
         _glideCameraFollowRot.Rotation = new Vector3(_glidePitch, _glideYaw, 0f);
-        
-        /*var glideCameraTransform = _glideCameraFollow.Transform;
-        glideCameraTransform.basis = Basis.Identity;
-        glideCameraTransform.origin =
-            inverseCameraDir * ;
-        _glideCameraFollow.Transform = glideCameraTransform;*/
-        
+
         // grab our corrected pitch and yaw after moving
         {
             var lookAt = new Transform().LookingAt(_glideVelocity, Vector3.Up);
             var lookAtEuler = lookAt.basis.GetEuler();
-            _glidePitch = lookAtEuler.x;
-            _glideYaw = lookAtEuler.y;
-            /*var yawVel = _glideVelocity;
-            yawVel.y = 0f;
-            _glideYaw = Vector3.Forward.AngleTo(yawVel.Normalized());
-
-            var pitchVel = new Vector3(0f, _glideVelocity.y, 0f);
-            _glidePitch = Mathf.Clamp(Vector3.Forward.AngleTo(pitchVel.Normalized()), GlideMinPitch, GlideMaxPitch);*/
+            _glidePitch = Mathf.LerpAngle(_glidePitch, lookAtEuler.x, DeflectLerpT);
+            _glideYaw = Mathf.LerpAngle(_glideYaw, lookAtEuler.y, DeflectLerpT);
         }
 
         foreach (var child in this.GetChildren<IPlayerGlidingEvent>())
