@@ -43,7 +43,7 @@ public class Dialogue : Spatial
     {
         if (Billboard)
         {
-            var cam = GetViewport().GetCamera();
+            var cam = GetNode<Camera>("/root/Main/UIOverlay ViewportContainer/Viewport/UIOverlay Camera");
             var newTransform = GlobalTransform;
             newTransform.basis = new Basis(cam.GlobalTransform.basis.RotationQuat());
             GlobalTransform = newTransform;
@@ -80,7 +80,7 @@ public class Dialogue : Spatial
         _textIndex = 0;
     }
 
-    public void ContinuePage()
+    public DialoguePage ContinuePage()
     {
         if (_inPage)
         {
@@ -96,8 +96,11 @@ public class Dialogue : Spatial
             {
                 EmitSignal(nameof(FinishedBook));
                 _dialogueLabel.Text = "";
+                return null;
             }
         }
+
+        return CurrentPage;
     }
 
     public void ResetAndStartPage()
