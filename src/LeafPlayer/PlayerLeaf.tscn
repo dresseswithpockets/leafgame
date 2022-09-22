@@ -15,8 +15,8 @@ persistence = 0.217
 lacunarity = 2.72
 
 [sub_resource type="CapsuleShape" id=2]
-radius = 0.2
-height = 0.2
+radius = 0.15
+height = 0.001
 
 [node name="PlayerLeaf" type="KinematicBody"]
 collision_layer = 4
@@ -41,7 +41,7 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.3, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.125, 0 )
 shape = SubResource( 2 )
 
 [node name="MovementWindPlayer" type="AudioStreamPlayer" parent="."]
@@ -61,7 +61,7 @@ radius = 3.0
 height = 100.0
 material = ExtResource( 7 )
 script = ExtResource( 8 )
-MaxAlpha = 0.4
+MaxAlpha = 0.65
 MinLineThreshold = 0.69
 MaxLineThreshold = 0.8
 MinInverseSpeed = 2.0

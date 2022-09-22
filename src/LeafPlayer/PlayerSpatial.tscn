@@ -19,24 +19,24 @@ radius = 0.199634
 script = ExtResource( 3 )
 
 [node name="Follow" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60519e-45, 0.3, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60519e-45, 0.5, -1 )
 visible = false
 script = ExtResource( 7 )
 follow_target = NodePath("../PlayerLeaf/FollowerRot/Follower")
 follow_lerp_t = 0.1
-follow_offset = Vector3( 0, 0.3, 0 )
+follow_offset = Vector3( 0, 0.5, 0 )
 
 [node name="LookAt" type="Spatial" parent="Follow"]
-transform = Transform( -1, -1.80001e-14, -1.50996e-07, -4.23516e-22, 1, -1.19209e-07, 1.50996e-07, -1.19209e-07, -1, 0, 0, 0 )
+transform = Transform( -1, 5.59035e-08, -1.40196e-07, -1.62396e-10, 0.928477, 0.371391, 1.50931e-07, 0.371391, -0.928477, 0, 0, 0 )
 script = ExtResource( 2 )
 look_at_target = NodePath("../../PlayerLeaf")
 look_at_lerp_t = 0.1
-look_at_offset = Vector3( 0, 0.3, 0 )
+look_at_offset = Vector3( 0, 0.1, 0 )
 
 [node name="RadialCamera" type="Spatial" parent="Follow/LookAt"]
 script = ExtResource( 4 )
 Target = NodePath("../../../PlayerLeaf")
-TargetOffset = Vector3( 0, 0.3, 0 )
+TargetOffset = Vector3( 0, 0.5, 0 )
 Shape = SubResource( 3 )
 CollisionMask = 1
 
@@ -53,13 +53,16 @@ far = 300.0
 MaxGroundSpeed = 2.0
 GroundAccel = 4.0
 GroundDecel = -2.0
+MaxGlidePower = 6.0
 MinGlidePower = 2.0
-GlidePowerDecelRate = 2.0
-MinCameraDistance = 0.45
-MaxCameraDistance = 1.0
-GlideMinPitch = -0.6
-GlideMaxPitch = 0.6
-GlideYawSpeed = 0.4
+GlidePowerDecelRate = 1.75
+GlideAtMinBeforeDecayTime = 2.0
+MinCameraDistance = 0.8
+MaxCameraDistance = 1.5
+GlideMinPitch = -0.7
+GlideMaxPitch = 0.7
+GlideYawSpeed = 0.5
+GlidePitchSpeed = 0.3
 GroundCamera = NodePath("Orbiter/LookAt/RadialCamera/GroundCamera")
 GroundCameraOrbiter = NodePath("Orbiter")
 GlideCameraFollow = NodePath("FollowerRot/Follower")
