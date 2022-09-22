@@ -66,20 +66,39 @@ public class PlayerLeaf : KinematicBody
 
     public void AddGlideBoost()
     {
+        if (_followingWind) return;
+        
+        _glideCooldownTimer = 0;
+        _glideMinTimer = 0;
+        _glidePower = MaxGlidePower;
+        
         if (!_gliding)
         {
-            _glideCameraFollow.GlobalTransform = _groundCamera.GlobalTransform;
+            var moveDir = _horizontalVelocity.Normalized();
+            GD.Print($"moveDir: {moveDir}");
+            _glideYaw = Mathf.Wrap(Mathf.Atan2(moveDir.x, moveDir.z) + Mathf.Pi, -Mathf.Tau, Mathf.Tau);
+            GD.Print($"new yaw: {Mathf.Rad2Deg(_glideYaw)}");
+            _glidePitch = 0f;
+            _glideCameraFollow.Translation = new Vector3(0f, 0f, _glidePower);
+            _glideCameraFollowRot.Rotation = new Vector3(_glidePitch, _glideYaw, 0f);
+            _glideCamera.Set("enabled", true);
+            _glideVelocity = new Basis(new Vector3(_glidePitch, _glideYaw, 0f)).Xform(Vector3.Forward) * _glidePower;
+
+            /*if (moveDir.z == 1f) angle = 0f;
+            else if (moveDir.x == -1f) angle = Mathf.Pi;
+            else if (moveDir.z == -1f) angle = Mathf.Pi * 2;
+            else if (moveDir.x == 1f) angle = Mathf.Pi * 3;
+            else angle = */
+
+            /*_glideCameraFollow.GlobalTransform = _groundCamera.GlobalTransform;
             _glideVelocity = _horizontalVelocity;
             _glideCamera.Set("enabled", true);
             var glideEuler = _groundCamera.GlobalTransform.basis.GetEuler();
             _glidePitch = glideEuler.x;
-            _glideYaw = glideEuler.y;
+            _glideYaw = glideEuler.y;*/
         }
-
+        
         _gliding = true;
-        _glideCooldownTimer = 0;
-        _glideMinTimer = 0;
-        _glidePower = MaxGlidePower;
     }
 
     private void MoveGround(float delta)
