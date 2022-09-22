@@ -12,4 +12,7 @@ public class DialoguePage : Resource
     [Export] public float Speed;
     [Export] public float NoisePeriod;
     [Export(PropertyHint.MultilineText)] public string Text;
+
+    [Export] public bool EnableCamera;
+    [Export] public string CameraName;
 }
