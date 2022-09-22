@@ -7,6 +7,8 @@ public class PlayerLeaf : KinematicBody
     [Export] public float GroundAccel = 30;
     [Export] public float GroundDecel = -10;
 
+    [Export] public float DeflectLerpT = 0.5f;
+    
     [Export] public float MaxGlidePower = 5;
     [Export] public float MinGlidePower = 1;
     [Export] public float GlidePowerDecelRate = 3;
@@ -51,6 +53,9 @@ public class PlayerLeaf : KinematicBody
     private float _glidePower;
     private float _glideCooldownTimer;
     private float _glideMinTimer;
+
+    private bool _followingWind;
+    private WindFollow _windFollow;
 
     public Vector3 Velocity => _gliding ? _glideVelocity : _horizontalVelocity;
     
@@ -213,6 +218,12 @@ public class PlayerLeaf : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
+        if (_followingWind)
+        {
+            MoveFollowWind(delta);
+            return;
+        }
+        
         if (!InputController.Instance.CanInput) return;
         
         _wishDir = Vector3.Zero;
@@ -222,7 +233,6 @@ public class PlayerLeaf : KinematicBody
                 0f,
                 Input.GetActionStrength("MoveBackward") - Input.GetActionStrength("MoveForward"));
         }
-        
         if (_gliding)
         {
             MoveGlide(delta);
@@ -237,5 +247,84 @@ public class PlayerLeaf : KinematicBody
     {
         GD.Print(windWall);
         // todo: move towards windWall.IslandCenter
+    }
+
+    private Vector3 _lastPosition;
+    
+    private void MoveFollowWind(float delta)
+    {
+        GlobalTranslation = _windFollow.GlobalTranslation;
+        
+        var deltaPos = _lastPosition - GlobalTranslation;
+        var velocity = deltaPos / delta;
+        //var followTransform = new Transform().LookingAt(velocity, Vector3.Up);
+
+        var speed = _windFollow.GetSpeedLines() * MaxCameraDistance;
+        _glideCameraFollow.Translation = new Vector3(speed, 0, -speed);
+        _glideCameraFollowRot.Rotation = _windFollow.GlobalTransform.basis.GetEuler();
+
+        foreach (var child in GetChildren())
+        {
+            switch (child)
+            {
+                case IPlayerGlidingEvent glidingEvent:
+                    glidingEvent.Gliding(this,
+                        _windFollow.GetSpeedLines() * (MaxGlidePower - MinGlidePower) + MinGlidePower,
+                        _windFollow.GlobalTransform.basis.RotationQuat(),
+                        velocity,
+                        _windFollow.UnitOffset > 0.75f,
+                        _windFollow.UnitOffset > 0.90f);
+                    break;
+                case IPlayerEvents playerEvents:
+                    playerEvents.GroundSpeed(_windFollow.GetVolume(), 1f);
+                    break;
+            }
+        }
+    }
+
+    public void FollowWind(WindFollow pathFollow)
+    {
+        InputController.Instance.AllowInput = false;
+        _gliding = false;
+        _lastPosition = GlobalTranslation;
+        _followingWind = true;
+        _windFollow = pathFollow;
+        pathFollow.UnitOffset = 0f;
+        pathFollow.Connect(nameof(WindFollow.Finished), 
+            this,
+            nameof(OnWindFollowFinished), 
+            null,
+            (uint)ConnectFlags.Oneshot);
+        pathFollow.StartFollow();
+        _glideCamera.Set("enabled", true);
+    }
+
+    private void OnWindFollowFinished()
+    {
+        InputController.Instance.AllowInput = true;
+        foreach (var child in GetChildren())
+        {
+            switch (child)
+            {
+                case IPlayerGlidingEvent glidingEvent:
+                    glidingEvent.Gliding(this,
+                        0f,
+                        _windFollow.GlobalTransform.basis.RotationQuat(),
+                        Vector3.Zero,
+                        false,
+                        false);
+                    break;
+                case IPlayerEvents playerEvents:
+                    playerEvents.GroundSpeed(0f, 1f);
+                    break;
+            }
+        }
+        
+        var cameraEuler = _glideCameraFollowRot.GlobalTransform.basis.GetEuler();
+        _groundCameraOrbiter.Set("input_rotation",
+            new Vector2(Mathf.Rad2Deg(cameraEuler.y), Mathf.Rad2Deg(cameraEuler.x)));
+        _glideCamera.Set("enabled", false);
+        _windFollow = null;
+        _followingWind = false;
     }
 }
