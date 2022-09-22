@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://Dialogue/DialogueSequence.cs" type="Script" id=1]
+[ext_resource path="res://Dialogue/island1intro/Island1Character.tres" type="Resource" id=2]
+[ext_resource path="res://Dialogue/island1intro/island1.tres" type="Resource" id=3]
+[ext_resource path="res://Dialogue/island1intro/island5.tres" type="Resource" id=4]
+[ext_resource path="res://Dialogue/island1intro/island4.tres" type="Resource" id=5]
+[ext_resource path="res://Dialogue/island1intro/island3.tres" type="Resource" id=6]
+[ext_resource path="res://Dialogue/island1intro/island2.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+Pages = [ ExtResource( 3 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ]
+Character = ExtResource( 2 )
