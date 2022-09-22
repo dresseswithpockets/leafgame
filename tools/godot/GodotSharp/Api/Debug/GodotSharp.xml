@@ -12356,37 +12356,37 @@
         </member>
         <member name="M:Godot.AnimationNode.GetCaption">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to override the text caption for this node.</para>
+            <para>Gets the text caption for this node (used by some editors).</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.GetChildByName(System.String)">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to return a child node by its <c>name</c>.</para>
+            <para>Gets a child node by index (used by editors inheriting from <see cref="T:Godot.AnimationRootNode"/>).</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.GetChildNodes">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to return all children nodes in order as a <c>name: node</c> dictionary.</para>
+            <para>Gets all children nodes in order as a <c>name: node</c> dictionary. Only useful when inheriting <see cref="T:Godot.AnimationRootNode"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.GetParameterDefaultValue(System.String)">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to return the default value of parameter "<c>name</c>". Parameters are custom local memory used for your nodes, given a resource can be reused in multiple trees.</para>
+            <para>Gets the default value of a parameter. Parameters are custom local memory used for your nodes, given a resource can be reused in multiple trees.</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.GetParameterList">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to return a list of the properties on this node. Parameters are custom local memory used for your nodes, given a resource can be reused in multiple trees. Format is similar to <see cref="M:Godot.Object.GetPropertyList"/>.</para>
+            <para>Gets the property information for parameter. Parameters are custom local memory used for your nodes, given a resource can be reused in multiple trees. Format is similar to <see cref="M:Godot.Object.GetPropertyList"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.HasFilter">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to return whether the blend tree editor should display filter editing on this node.</para>
+            <para>Returns <c>true</c> whether you want the blend tree editor to display filter editing on this node.</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationNode.Process(System.Single,System.Boolean)">
             <summary>
-            <para>When inheriting from <see cref="T:Godot.AnimationRootNode"/>, implement this virtual method to run some code when this node is processed. The <c>time</c> parameter is a relative delta, unless <c>seek</c> is <c>true</c>, in which case it is absolute.</para>
+            <para>User-defined callback called when a custom node is processed. The <c>time</c> parameter is a relative delta, unless <c>seek</c> is <c>true</c>, in which case it is absolute.</para>
             <para>Here, call the <see cref="M:Godot.AnimationNode.BlendInput(System.Int32,System.Single,System.Boolean,System.Single,Godot.AnimationNode.FilterAction,System.Boolean)"/>, <see cref="M:Godot.AnimationNode.BlendNode(System.String,Godot.AnimationNode,System.Single,System.Boolean,System.Single,Godot.AnimationNode.FilterAction,System.Boolean)"/> or <see cref="M:Godot.AnimationNode.BlendAnimation(System.String,System.Single,System.Single,System.Boolean,System.Single)"/> functions. You can also use <see cref="M:Godot.AnimationNode.GetParameter(System.String)"/> and <see cref="M:Godot.AnimationNode.SetParameter(System.String,System.Object)"/> to modify local memory.</para>
             <para>This function should return the time left for the current animation to finish (if unsure, pass the value from the main blend being called).</para>
             </summary>
@@ -12984,7 +12984,7 @@
         </member>
         <member name="P:Godot.AnimationNodeStateMachineTransition.AdvanceCondition">
             <summary>
-            <para>Turn on auto advance when this condition is set. The provided name will become a boolean parameter on the <see cref="T:Godot.AnimationTree"/> that can be controlled from code (see <a href="$DOCS_URL/tutorials/animation/animation_tree.html#controlling-from-code">Using AnimationTree</a>). For example, if <see cref="P:Godot.AnimationTree.TreeRoot"/> is an <see cref="T:Godot.AnimationNodeStateMachine"/> and <see cref="P:Godot.AnimationNodeStateMachineTransition.AdvanceCondition"/> is set to <c>"idle"</c>:</para>
+            <para>Turn on auto advance when this condition is set. The provided name will become a boolean parameter on the <see cref="T:Godot.AnimationTree"/> that can be controlled from code (see <a href="$DOCS_URL/tutorials/animation/animation_tree.html#controlling-from-code"></a>). For example, if <see cref="P:Godot.AnimationTree.TreeRoot"/> is an <see cref="T:Godot.AnimationNodeStateMachine"/> and <see cref="P:Godot.AnimationNodeStateMachineTransition.AdvanceCondition"/> is set to <c>"idle"</c>:</para>
             <para><code>
             $animation_tree["parameters/conditions/idle"] = is_on_floor and (linear_velocity.x == 0)
             </code></para>
@@ -13157,7 +13157,7 @@
         </member>
         <member name="M:Godot.AnimationPlayer.GetAnimation(System.String)">
             <summary>
-            <para>Returns the <see cref="T:Godot.Animation"/> with the key <c>name</c>. If the animation does not exist, <c>null</c> is returned and an error is logged.</para>
+            <para>Returns the <see cref="T:Godot.Animation"/> with key <c>name</c> or <c>null</c> if not found.</para>
             </summary>
         </member>
         <member name="M:Godot.AnimationPlayer.GetAnimationList">
@@ -15424,8 +15424,7 @@
         </member>
         <member name="T:Godot.AudioStreamPlayer2D">
             <summary>
-            <para>Plays audio that dampens with distance from a given position.</para>
-            <para>By default, audio is heard from the screen center. This can be changed by adding a <see cref="T:Godot.Listener2D"/> node to the scene and enabling it by calling <see cref="M:Godot.Listener2D.MakeCurrent"/> on it.</para>
+            <para>Plays audio that dampens with distance from screen center.</para>
             <para>See also <see cref="T:Godot.AudioStreamPlayer"/> to play a sound non-positionally.</para>
             <para>Note: Hiding an <see cref="T:Godot.AudioStreamPlayer2D"/> node does not disable its audio output. To temporarily disable an <see cref="T:Godot.AudioStreamPlayer2D"/>'s audio output, set <see cref="P:Godot.AudioStreamPlayer2D.VolumeDb"/> to a very low value like <c>-100</c> (which isn't audible to human hearing).</para>
             </summary>
@@ -17985,7 +17984,7 @@
         </member>
         <member name="P:Godot.Camera.Size">
             <summary>
-            <para>The camera's size in meters measured as the diameter of the width or height, depending on <see cref="P:Godot.Camera.KeepAspect"/>. Only applicable in orthogonal and frustum modes.</para>
+            <para>The camera's size measured as 1/2 the width or height. Only applicable in orthogonal and frustum modes. Since <see cref="P:Godot.Camera.KeepAspect"/> locks on axis, <c>size</c> sets the other axis' size length.</para>
             </summary>
         </member>
         <member name="P:Godot.Camera.FrustumOffset">
@@ -18448,7 +18447,7 @@
         <member name="T:Godot.CanvasItem">
             <summary>
             <para>Base class of anything 2D. Canvas items are laid out in a tree; children inherit and extend their parent's transform. <see cref="T:Godot.CanvasItem"/> is extended by <see cref="T:Godot.Control"/> for anything GUI-related, and by <see cref="T:Godot.Node2D"/> for anything related to the 2D engine.</para>
-            <para>Any <see cref="T:Godot.CanvasItem"/> can draw. For this, <see cref="M:Godot.CanvasItem.Update"/> is called by the engine, then <see cref="F:Godot.CanvasItem.NotificationDraw"/> will be received on idle time to request redraw. Because of this, canvas items don't need to be redrawn on every frame, improving the performance significantly. Several functions for drawing on the <see cref="T:Godot.CanvasItem"/> are provided (see <c>draw_*</c> functions). However, they can only be used inside <see cref="M:Godot.CanvasItem._Draw"/>, its corresponding <see cref="M:Godot.Object._Notification(System.Int32)"/> or methods connected to the <c>draw</c> signal.</para>
+            <para>Any <see cref="T:Godot.CanvasItem"/> can draw. For this, <see cref="M:Godot.CanvasItem.Update"/> must be called, then <see cref="F:Godot.CanvasItem.NotificationDraw"/> will be received on idle time to request redraw. Because of this, canvas items don't need to be redrawn on every frame, improving the performance significantly. Several functions for drawing on the <see cref="T:Godot.CanvasItem"/> are provided (see <c>draw_*</c> functions). However, they can only be used inside the <see cref="M:Godot.Object._Notification(System.Int32)"/>, signal or <see cref="M:Godot.CanvasItem._Draw"/> virtual functions.</para>
             <para>Canvas items are drawn in tree order. By default, children are on top of their parents so a root <see cref="T:Godot.CanvasItem"/> will be drawn behind everything. This behavior can be changed on a per-item basis.</para>
             <para>A <see cref="T:Godot.CanvasItem"/> can also be hidden, which will also hide its children. It provides many ways to change parameters such as modulation (for itself and its children) and self modulation (only for itself), as well as its blend mode.</para>
             <para>Ultimately, a transform notification can be requested, which will notify the node that its global position changed in case the parent tree changed.</para>
@@ -18467,7 +18466,7 @@
         </member>
         <member name="F:Godot.CanvasItem.NotificationDraw">
             <summary>
-            <para>The <see cref="T:Godot.CanvasItem"/> is requested to draw (see <see cref="M:Godot.CanvasItem._Draw"/>).</para>
+            <para>The <see cref="T:Godot.CanvasItem"/> is requested to draw.</para>
             </summary>
         </member>
         <member name="F:Godot.CanvasItem.NotificationVisibilityChanged">
@@ -18558,8 +18557,7 @@
         </member>
         <member name="M:Godot.CanvasItem._Draw">
             <summary>
-            <para>Called when <see cref="T:Godot.CanvasItem"/> has been requested to redraw (when <see cref="M:Godot.CanvasItem.Update"/> is called, either manually or by the engine).</para>
-            <para>Corresponds to the <see cref="F:Godot.CanvasItem.NotificationDraw"/> notification in <see cref="M:Godot.Object._Notification(System.Int32)"/>.</para>
+            <para>Overridable function called by the engine (if defined) to draw the canvas item.</para>
             </summary>
         </member>
         <member name="M:Godot.CanvasItem.GetCanvasItem">
@@ -18569,7 +18567,7 @@
         </member>
         <member name="M:Godot.CanvasItem.IsVisibleInTree">
             <summary>
-            <para>Returns <c>true</c> if the node is present in the <see cref="T:Godot.SceneTree"/>, its <see cref="P:Godot.CanvasItem.Visible"/> property is <c>true</c> and all its antecedents are also visible. If any antecedent is hidden, this node will not be visible in the scene tree, and is consequently not drawn (see <see cref="M:Godot.CanvasItem._Draw"/>).</para>
+            <para>Returns <c>true</c> if the node is present in the <see cref="T:Godot.SceneTree"/>, its <see cref="P:Godot.CanvasItem.Visible"/> property is <c>true</c> and all its antecedents are also visible. If any antecedent is hidden, this node will not be visible in the scene tree.</para>
             </summary>
         </member>
         <member name="M:Godot.CanvasItem.Show">
@@ -18584,7 +18582,7 @@
         </member>
         <member name="M:Godot.CanvasItem.Update">
             <summary>
-            <para>Queues the <see cref="T:Godot.CanvasItem"/> to redraw. During idle time, if <see cref="T:Godot.CanvasItem"/> is visible, <see cref="F:Godot.CanvasItem.NotificationDraw"/> is sent and <see cref="M:Godot.CanvasItem._Draw"/> is called. This only occurs once per frame, even if this method has been called multiple times.</para>
+            <para>Queue the <see cref="T:Godot.CanvasItem"/> for update. <see cref="F:Godot.CanvasItem.NotificationDraw"/> will be called on idle time to request redraw.</para>
             </summary>
         </member>
         <member name="M:Godot.CanvasItem.SetAsToplevel(System.Boolean)">
@@ -21390,7 +21388,6 @@
         <member name="T:Godot.Curve">
             <summary>
             <para>A curve that can be saved and re-used for other objects. By default, it ranges between <c>0</c> and <c>1</c> on the Y axis and positions points relative to the <c>0.5</c> Y position.</para>
-            <para>See also <see cref="T:Godot.Gradient"/> which is designed for color interpolation. See also <see cref="T:Godot.Curve2D"/> and <see cref="T:Godot.Curve3D"/>.</para>
             </summary>
         </member>
         <member name="F:Godot.Curve.TangentMode.Free">
@@ -21536,8 +21533,8 @@
         </member>
         <member name="M:Godot.Curve2D.AddPoint(Godot.Vector2,System.Nullable{Godot.Vector2},System.Nullable{Godot.Vector2},System.Int32)">
             <summary>
-            <para>Adds a point with the specified <c>position</c> relative to the curve's own position, with control points <c>in</c> and <c>out</c>. Appends the new point at the end of the point list.</para>
-            <para>If <c>index</c> is given, the new point is inserted before the existing point identified by index <c>index</c>. Every existing point starting from <c>index</c> is shifted further down the list of points. The index must be greater than or equal to <c>0</c> and must not exceed the number of existing points in the line. See <see cref="M:Godot.Curve2D.GetPointCount"/>.</para>
+            <para>Adds a point to a curve at <c>position</c> relative to the <see cref="T:Godot.Curve2D"/>'s position, with control points <c>in</c> and <c>out</c>.</para>
+            <para>If <c>at_position</c> is given, the point is inserted before the point number <c>at_position</c>, moving that point (and every point after) after the inserted point. If <c>at_position</c> is not given, or is an illegal value (<c>at_position &lt;0</c> or <c>at_position &gt;= [method get_point_count]</c>), the point will be appended at the end of the point list.</para>
             </summary>
             <param name="in">If the parameter is null, then the default value is new Vector2(0, 0)</param>
             <param name="out">If the parameter is null, then the default value is new Vector2(0, 0)</param>
@@ -21653,8 +21650,8 @@
         </member>
         <member name="M:Godot.Curve3D.AddPoint(Godot.Vector3,System.Nullable{Godot.Vector3},System.Nullable{Godot.Vector3},System.Int32)">
             <summary>
-            <para>Adds a point with the specified <c>position</c> relative to the curve's own position, with control points <c>in</c> and <c>out</c>. Appends the new point at the end of the point list.</para>
-            <para>If <c>index</c> is given, the new point is inserted before the existing point identified by index <c>index</c>. Every existing point starting from <c>index</c> is shifted further down the list of points. The index must be greater than or equal to <c>0</c> and must not exceed the number of existing points in the line. See <see cref="M:Godot.Curve3D.GetPointCount"/>.</para>
+            <para>Adds a point to a curve at <c>position</c> relative to the <see cref="T:Godot.Curve3D"/>'s position, with control points <c>in</c> and <c>out</c>.</para>
+            <para>If <c>at_position</c> is given, the point is inserted before the point number <c>at_position</c>, moving that point (and every point after) after the inserted point. If <c>at_position</c> is not given, or is an illegal value (<c>at_position &lt;0</c> or <c>at_position &gt;= [method get_point_count]</c>), the point will be appended at the end of the point list.</para>
             </summary>
             <param name="in">If the parameter is null, then the default value is new Vector3(0, 0, 0)</param>
             <param name="out">If the parameter is null, then the default value is new Vector3(0, 0, 0)</param>
@@ -23034,7 +23031,6 @@
         <member name="M:Godot.Font.DrawChar(Godot.RID,Godot.Vector2,System.Int32,System.Int32,System.Nullable{Godot.Color},System.Boolean)">
             <summary>
             <para>Draw character <c>char</c> into a canvas item using the font at a given position, with <c>modulate</c> color, and optionally kerning if <c>next</c> is passed. clipping the width. <c>position</c> specifies the baseline, not the top. To draw from the top, ascent must be added to the Y axis. The width used by the character is returned, making this function useful for drawing strings character by character.</para>
-            <para>If <c>outline</c> is <c>true</c>, the outline of the character is drawn instead of the character itself.</para>
             </summary>
             <param name="modulate">If the parameter is null, then the default value is new Color(1, 1, 1, 1)</param>
         </member>
@@ -23933,8 +23929,7 @@
         </member>
         <member name="T:Godot.Gradient">
             <summary>
-            <para>Given a set of colors, this resource will interpolate them in order. This means that if you have color 1, color 2 and color 3, the gradient will interpolate from color 1 to color 2 and from color 2 to color 3. The gradient will initially have 2 colors (black and white), one (black) at gradient lower offset 0 and the other (white) at the gradient higher offset 1.</para>
-            <para>See also <see cref="T:Godot.Curve"/> which supports more complex easing methods, but does not support colors.</para>
+            <para>Given a set of colors, this resource will interpolate them in order. This means that if you have color 1, color 2 and color 3, the ramp will interpolate from color 1 to color 2 and from color 2 to color 3. The ramp will initially have 2 colors (black and white), one (black) at ramp lower offset 0 and the other (white) at the ramp higher offset 1.</para>
             </summary>
         </member>
         <member name="F:Godot.Gradient.InterpolationModeEnum.Linear">
@@ -24693,8 +24688,7 @@
         </member>
         <member name="T:Godot.HTTPClient">
             <summary>
-            <para>Hyper-text transfer protocol client (sometimes called "User Agent"). Used to make HTTP requests to download web content, upload files and other data or to communicate with various services, among other use cases.</para>
-            <para>See the <see cref="T:Godot.HTTPRequest"/> node for a higher-level alternative.</para>
+            <para>Hyper-text transfer protocol client (sometimes called "User Agent"). Used to make HTTP requests to download web content, upload files and other data or to communicate with various services, among other use cases. See the <see cref="T:Godot.HTTPRequest"/> node for a higher-level alternative.</para>
             <para>Note: This client only needs to connect to a host once (see <see cref="M:Godot.HTTPClient.ConnectToHost(System.String,System.Int32,System.Boolean,System.Boolean)"/>) to send multiple requests. Because of this, methods that take URLs usually take just the part after the host instead of the full URL, as the client is already connected to a host. See <see cref="M:Godot.HTTPClient.Request(Godot.HTTPClient.Method,System.String,System.String[],System.String)"/> for a full example and to get started.</para>
             <para>A <see cref="T:Godot.HTTPClient"/> should be reused between multiple requests or to connect to different hosts instead of creating one client per request. Supports SSL and SSL server certificate verification. HTTP status codes in the 2xx range indicate success, 3xx redirection (i.e. "try again, but over here"), 4xx something was wrong with the request, and 5xx something went wrong on the server's side.</para>
             <para>For more information on HTTP, see https://developer.mozilla.org/en-US/docs/Web/HTTP (or read RFC 2616 to get it straight from the source: https://tools.ietf.org/html/rfc2616).</para>
@@ -27371,16 +27365,9 @@
             <para>The InstancePlaceholder does not have a transform. This causes any child nodes to be positioned relatively to the Viewport from point (0,0), rather than their parent as displayed in the editor. Replacing the placeholder with a scene with a transform will transform children relatively to their parent again.</para>
             </summary>
         </member>
-        <member name="M:Godot.InstancePlaceholder.GetStoredValues(System.Boolean)">
-            <summary>
-            <para>Returns the list of properties that will be applied to the node when <see cref="M:Godot.InstancePlaceholder.CreateInstance(System.Boolean,Godot.PackedScene)"/> is called.</para>
-            <para>If <c>with_order</c> is <c>true</c>, a key named <c>.order</c> (note the leading period) is added to the dictionary. This <c>.order</c> key is an <see cref="T:Godot.Collections.Array"/> of <see cref="T:System.String"/> property names specifying the order in which properties will be applied (with index 0 being the first).</para>
-            </summary>
-        </member>
         <member name="M:Godot.InstancePlaceholder.CreateInstance(System.Boolean,Godot.PackedScene)">
             <summary>
-            <para>Call this method to actually load in the node. The created node will be placed as a sibling above the <see cref="T:Godot.InstancePlaceholder"/> in the scene tree. The <see cref="T:Godot.Node"/>'s reference is also returned for convenience.</para>
-            <para>Note: <see cref="M:Godot.InstancePlaceholder.CreateInstance(System.Boolean,Godot.PackedScene)"/> is not thread-safe. Use <see cref="M:Godot.Object.CallDeferred(System.String,System.Object[])"/> if calling from a thread.</para>
+            <para>Not thread-safe. Use <see cref="M:Godot.Object.CallDeferred(System.String,System.Object[])"/> if calling from a thread.</para>
             </summary>
         </member>
         <member name="M:Godot.InstancePlaceholder.ReplaceByInstance(Godot.PackedScene)">
@@ -29240,28 +29227,28 @@
         </member>
         <member name="M:Godot.Line2D.SetPointPosition(System.Int32,Godot.Vector2)">
             <summary>
-            <para>Overwrites the position of the point at index <c>index</c> with the supplied <c>position</c>.</para>
+            <para>Overwrites the position in point <c>i</c> with the supplied <c>position</c>.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.GetPointPosition(System.Int32)">
             <summary>
-            <para>Returns the position of the point at index <c>index</c>.</para>
+            <para>Returns point <c>i</c>'s position.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.GetPointCount">
             <summary>
-            <para>Returns the amount of points in the line.</para>
+            <para>Returns the Line2D's amount of points.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.AddPoint(Godot.Vector2,System.Int32)">
             <summary>
-            <para>Adds a point with the specified <c>position</c> relative to the line's own position. Appends the new point at the end of the point list.</para>
-            <para>If <c>index</c> is given, the new point is inserted before the existing point identified by index <c>index</c>. Every existing point starting from <c>index</c> is shifted further down the list of points. The index must be greater than or equal to <c>0</c> and must not exceed the number of existing points in the line. See <see cref="M:Godot.Line2D.GetPointCount"/>.</para>
+            <para>Adds a point at the <c>position</c>. Appends the point at the end of the line.</para>
+            <para>If <c>at_position</c> is given, the point is inserted before the point number <c>at_position</c>, moving that point (and every point after) after the inserted point. If <c>at_position</c> is not given, or is an illegal value (<c>at_position &lt; 0</c> or <c>at_position &gt;= [method get_point_count]</c>), the point will be appended at the end of the point list.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.RemovePoint(System.Int32)">
             <summary>
-            <para>Removes the point at index <c>index</c> from the line.</para>
+            <para>Removes the point at index <c>i</c> from the line.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.ClearPoints">
@@ -30813,7 +30800,7 @@
         <member name="M:Godot.MultiMesh.SetInstanceColor(System.Int32,Godot.Color)">
             <summary>
             <para>Sets the color of a specific instance by multiplying the mesh's existing vertex colors.</para>
-            <para>For the color to take effect, ensure that <see cref="P:Godot.MultiMesh.ColorFormat"/> is non-<c>null</c> on the <see cref="T:Godot.MultiMesh"/> and <see cref="P:Godot.SpatialMaterial.VertexColorUseAsAlbedo"/> is <c>true</c> on the material. If the color doesn't look as expected, make sure the material's albedo color is set to pure white (<c>Color(1, 1, 1)</c>).</para>
+            <para>For the color to take effect, ensure that <see cref="P:Godot.MultiMesh.ColorFormat"/> is non-<c>null</c> on the <see cref="T:Godot.MultiMesh"/> and <see cref="P:Godot.SpatialMaterial.VertexColorUseAsAlbedo"/> is <c>true</c> on the material.</para>
             </summary>
         </member>
         <member name="M:Godot.MultiMesh.GetInstanceColor(System.Int32)">
@@ -37751,7 +37738,6 @@
         <member name="T:Godot.PopupPanel">
             <summary>
             <para>Class for displaying popups with a panel background. In some cases it might be simpler to use than <see cref="T:Godot.Popup"/>, since it provides a configurable background. If you are making windows, better check <see cref="T:Godot.WindowDialog"/>.</para>
-            <para>If any <see cref="T:Godot.Control"/> node is added as a child of this <see cref="T:Godot.PopupPanel"/>, it will be stretched to fit the panel's size (similar to how <see cref="T:Godot.PanelContainer"/> works).</para>
             </summary>
         </member>
         <member name="T:Godot.Portal">
@@ -40341,13 +40327,11 @@
         <member name="P:Godot.SceneTree.DebugCollisionsHint">
             <summary>
             <para>If <c>true</c>, collision shapes will be visible when running the game from the editor for debugging purposes.</para>
-            <para>Note: This property is not designed to be changed at run-time. Changing the value of <see cref="P:Godot.SceneTree.DebugCollisionsHint"/> while the project is running will not have the desired effect.</para>
             </summary>
         </member>
         <member name="P:Godot.SceneTree.DebugNavigationHint">
             <summary>
             <para>If <c>true</c>, navigation polygons will be visible when running the game from the editor for debugging purposes.</para>
-            <para>Note: This property is not designed to be changed at run-time. Changing the value of <see cref="P:Godot.SceneTree.DebugNavigationHint"/> while the project is running will not have the desired effect.</para>
             </summary>
         </member>
         <member name="P:Godot.SceneTree.Paused">
@@ -41097,8 +41081,7 @@
         </member>
         <member name="P:Godot.Shape2D.CustomSolverBias">
             <summary>
-            <para>The shape's custom solver bias. Defines how much bodies react to enforce contact separation when this shape is involved.</para>
-            <para>When set to <c>0.0</c>, the default value of <c>0.3</c> is used.</para>
+            <para>The shape's custom solver bias.</para>
             </summary>
         </member>
         <member name="M:Godot.Shape2D.Collide(Godot.Transform2D,Godot.Shape2D,Godot.Transform2D)">
@@ -42807,7 +42790,7 @@
             <summary>
             <para>If <c>true</c>, anisotropy is enabled. Anisotropy changes the shape of the specular blob and aligns it to tangent space. This is useful for brushed aluminium and hair reflections.</para>
             <para>Note: Mesh tangents are needed for anisotropy to work. If the mesh does not contain tangents, the anisotropy effect will appear broken.</para>
-            <para>Note: Material anisotropy should not to be confused with anisotropic texture filtering. Anisotropic texture filtering can be enabled by selecting a texture in the FileSystem dock, going to the Import dock, checking the Anisotropic checkbox then clicking Reimport. The anisotropic filtering level can be changed by adjusting .</para>
+            <para>Note: Material anisotropy should not to be confused with anisotropic texture filtering. Anisotropic texture filtering can be enabled by selecting a texture in the FileSystem dock, going to the Import dock, checking the Anisotropic checkbox then clicking Reimport.</para>
             </summary>
         </member>
         <member name="P:Godot.SpatialMaterial.Anisotropy">
@@ -43373,7 +43356,7 @@
         </member>
         <member name="P:Godot.Sprite3D.Texture">
             <summary>
-            <para><see cref="T:Godot.Texture"/> object to draw. If <see cref="P:Godot.GeometryInstance.MaterialOverride"/> is used, this will be overridden. The size information is still used.</para>
+            <para><see cref="T:Godot.Texture"/> object to draw. If <see cref="P:Godot.GeometryInstance.MaterialOverride"/> is used, this will be overridden.</para>
             </summary>
         </member>
         <member name="P:Godot.Sprite3D.Hframes">
@@ -44899,16 +44882,6 @@
         <member name="M:Godot.Tabs.GetTabIcon(System.Int32)">
             <summary>
             <para>Returns the <see cref="T:Godot.Texture"/> for the tab at index <c>tab_idx</c> or <c>null</c> if the tab has no <see cref="T:Godot.Texture"/>.</para>
-            </summary>
-        </member>
-        <member name="M:Godot.Tabs.SetTabButtonIcon(System.Int32,Godot.Texture)">
-            <summary>
-            <para>Sets the button icon from the tab at index <c>tab_idx</c>.</para>
-            </summary>
-        </member>
-        <member name="M:Godot.Tabs.GetTabButtonIcon(System.Int32)">
-            <summary>
-            <para>Returns the button icon from the tab at index <c>tab_idx</c>.</para>
             </summary>
         </member>
         <member name="M:Godot.Tabs.SetTabDisabled(System.Int32,System.Boolean)">
@@ -48519,12 +48492,13 @@
         </member>
         <member name="T:Godot.UPNP">
             <summary>
-            <para>This class can be used to discover compatible <see cref="T:Godot.UPNPDevice"/>s on the local network and execute commands on them, like managing port mappings (for port forwarding/NAT traversal) and querying the local and remote network IP address. Note that methods on this class are synchronous and block the calling thread.</para>
-            <para>To forward a specific port (here <c>7777</c>, note both <see cref="M:Godot.UPNP.Discover(System.Int32,System.Int32,System.String)"/> and <see cref="M:Godot.UPNP.AddPortMapping(System.Int32,System.Int32,System.String,System.String,System.Int32)"/> can return errors that should be checked):</para>
+            <para>Provides UPNP functionality to discover <see cref="T:Godot.UPNPDevice"/>s on the local network and execute commands on them, like managing port mappings (port forwarding) and querying the local and remote network IP address. Note that methods on this class are synchronous and block the calling thread.</para>
+            <para>To forward a specific port:</para>
             <para><code>
+            const PORT = 7777
             var upnp = UPNP.new()
-            upnp.discover()
-            upnp.add_port_mapping(7777)
+            upnp.discover(2000, 2, "InternetGatewayDevice")
+            upnp.add_port_mapping(port)
             </code></para>
             <para>To close a specific port (e.g. after you have finished using it):</para>
             <para><code>
@@ -48535,7 +48509,7 @@
             # Emitted when UPnP port mapping setup is completed (regardless of success or failure).
             signal upnp_completed(error)
             
-            # Replace this with your own server port number between 1024 and 65535.
+            # Replace this with your own server port number between 1025 and 65535.
             const SERVER_PORT = 3928
             var thread = null
             
@@ -48562,14 +48536,6 @@
                 # Wait for thread finish here to handle game exit while the thread is running.
                 thread.wait_to_finish()
             </code></para>
-            <para>Terminology: In the context of UPnP networking, "gateway" (or "internet gateway device", short IGD) refers to network devices that allow computers in the local network to access the internet ("wide area network", WAN). These gateways are often also called "routers".</para>
-            <para>Pitfalls:</para>
-            <para>- As explained above, these calls are blocking and shouldn't be run on the main thread, especially as they can block for multiple seconds at a time. Use threading!</para>
-            <para>- Networking is physical and messy. Packets get lost in transit or get filtered, addresses, free ports and assigned mappings change, and devices may leave or join the network at any time. Be mindful of this, be diligent when checking and handling errors, and handle these gracefully if you can: add clear error UI, timeouts and re-try handling.</para>
-            <para>- Port mappings may change (and be removed) at any time, and the remote/external IP address of the gateway can change likewise. You should consider re-querying the external IP and try to update/refresh the port mapping periodically (for example, every 5 minutes and on networking failures).</para>
-            <para>- Not all devices support UPnP, and some users disable UPnP support. You need to handle this (e.g. documenting and requiring the user to manually forward ports, or adding alternative methods of NAT traversal, like a relay/mirror server, or NAT hole punching, STUN/TURN, etc.).</para>
-            <para>- Consider what happens on mapping conflicts. Maybe multiple users on the same network would like to play your game at the same time, or maybe another application uses the same port. Make the port configurable, and optimally choose a port automatically (re-trying with a different port on failure).</para>
-            <para>Further reading: If you want to know more about UPnP (and the Internet Gateway Device (IGD) and Port Control Protocol (PCP) specifically), <a href="https://en.wikipedia.org/wiki/Universal_Plug_and_Play">Wikipedia</a> is a good first stop, the specification can be found at the <a href="https://openconnectivity.org/developer/specifications/upnp-resources/upnp/">Open Connectivity Foundation</a> and Godot's implementation is based on the <a href="https://github.com/miniupnp/miniupnp">MiniUPnP client</a>.</para>
             </summary>
         </member>
         <member name="F:Godot.UPNP.UPNPResult.Success">
@@ -48781,22 +48747,20 @@
         </member>
         <member name="M:Godot.UPNP.AddPortMapping(System.Int32,System.Int32,System.String,System.String,System.Int32)">
             <summary>
-            <para>Adds a mapping to forward the external <c>port</c> (between 1 and 65535, although recommended to use port 1024 or above) on the default gateway (see <see cref="M:Godot.UPNP.GetGateway"/>) to the <c>internal_port</c> on the local machine for the given protocol <c>proto</c> (either <c>TCP</c> or <c>UDP</c>, with UDP being the default). If a port mapping for the given port and protocol combination already exists on that gateway device, this method tries to overwrite it. If that is not desired, you can retrieve the gateway manually with <see cref="M:Godot.UPNP.GetGateway"/> and call <see cref="M:Godot.UPNP.AddPortMapping(System.Int32,System.Int32,System.String,System.String,System.Int32)"/> on it, if any. Note that forwarding a well-known port (below 1024) with UPnP may fail depending on the device.</para>
-            <para>Depending on the gateway device, if a mapping for that port already exists, it will either be updated or it will refuse this command due to that conflict, especially if the existing mapping for that port wasn't created via UPnP or points to a different network address (or device) than this one.</para>
+            <para>Adds a mapping to forward the external <c>port</c> (between 1 and 65535) on the default gateway (see <see cref="M:Godot.UPNP.GetGateway"/>) to the <c>internal_port</c> on the local machine for the given protocol <c>proto</c> (either <c>TCP</c> or <c>UDP</c>, with UDP being the default). If a port mapping for the given port and protocol combination already exists on that gateway device, this method tries to overwrite it. If that is not desired, you can retrieve the gateway manually with <see cref="M:Godot.UPNP.GetGateway"/> and call <see cref="M:Godot.UPNP.AddPortMapping(System.Int32,System.Int32,System.String,System.String,System.Int32)"/> on it, if any.</para>
             <para>If <c>internal_port</c> is <c>0</c> (the default), the same port number is used for both the external and the internal port (the <c>port</c> value).</para>
-            <para>The description (<c>desc</c>) is shown in some routers management UIs and can be used to point out which application added the mapping.</para>
-            <para>The mapping's lease <c>duration</c> can be limited by specifying a duration in seconds. The default of <c>0</c> means no duration, i.e. a permanent lease and notably some devices only support these permanent leases. Note that whether permanent or not, this is only a request and the gateway may still decide at any point to remove the mapping (which usually happens on a reboot of the gateway, when its external IP address changes, or on some models when it detects a port mapping has become inactive, i.e. had no traffic for multiple minutes). If not <c>0</c> (permanent), the allowed range according to spec is between <c>120</c> (2 minutes) and <c>86400</c> seconds (24 hours).</para>
+            <para>The description (<c>desc</c>) is shown in some router UIs and can be used to point out which application added the mapping. The mapping's lease duration can be limited by specifying a <c>duration</c> (in seconds). However, some routers are incompatible with one or both of these, so use with caution and add fallback logic in case of errors to retry without them if in doubt.</para>
             <para>See <see cref="T:Godot.UPNP.UPNPResult"/> for possible return values.</para>
             </summary>
         </member>
         <member name="M:Godot.UPNP.DeletePortMapping(System.Int32,System.String)">
             <summary>
-            <para>Deletes the port mapping for the given port and protocol combination on the default gateway (see <see cref="M:Godot.UPNP.GetGateway"/>) if one exists. <c>port</c> must be a valid port between 1 and 65535, <c>proto</c> can be either <c>TCP</c> or <c>UDP</c>. May be refused for mappings pointing to addresses other than this one, for well-known ports (below 1024), or for mappings not added via UPnP. See <see cref="T:Godot.UPNP.UPNPResult"/> for possible return values.</para>
+            <para>Deletes the port mapping for the given port and protocol combination on the default gateway (see <see cref="M:Godot.UPNP.GetGateway"/>) if one exists. <c>port</c> must be a valid port between 1 and 65535, <c>proto</c> can be either <c>TCP</c> or <c>UDP</c>. See <see cref="T:Godot.UPNP.UPNPResult"/> for possible return values.</para>
             </summary>
         </member>
         <member name="T:Godot.UPNPDevice">
             <summary>
-            <para>Universal Plug and Play (UPnP) device. See <see cref="T:Godot.UPNP"/> for UPnP discovery and utility functions. Provides low-level access to UPNP control commands. Allows to manage port mappings (port forwarding) and to query network information of the device (like local and external IP address and status). Note that methods on this class are synchronous and block the calling thread.</para>
+            <para>UPNP device. See <see cref="T:Godot.UPNP"/> for UPNP discovery and utility functions. Provides low-level access to UPNP control commands. Allows to manage port mappings (port forwarding) and to query network information of the device (like local and external IP address and status). Note that methods on this class are synchronous and block the calling thread.</para>
             </summary>
         </member>
         <member name="F:Godot.UPNPDevice.IGDStatus.Ok">
@@ -59143,7 +59107,6 @@
             <summary>
             <para>Returns the current UNIX epoch timestamp in seconds.</para>
             <para>Important: This is the system clock that the user can manually set. Never use this method for precise time calculation since its results are also subject to automatic adjustments by the operating system. Always use <see cref="M:Godot.OS.GetTicksUsec"/> or <see cref="M:Godot.OS.GetTicksMsec"/> for precise time calculation instead, since they are guaranteed to be monotonic (i.e. never decrease).</para>
-            <para>Note: To get a floating point timestamp with sub-second precision, use <see cref="M:Godot.Time.GetUnixTimeFromSystem"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.OS.GetDatetimeFromUnixTime(System.Int64)">
