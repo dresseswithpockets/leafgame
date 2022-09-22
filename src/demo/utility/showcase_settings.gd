@@ -69,17 +69,17 @@ func _ready():
 func create_save_directories():
     var dir := Directory.new()
     var path_settings = get_path_settings()
-    var full_path = get_config_file_path()
+    var _full_path = get_config_file_path()
     
     if !dir.dir_exists(path_settings):
-        dir.make_dir_recursive(path_settings)
+        var _r = dir.make_dir_recursive(path_settings)
 
 
 func load_all_settings():
     var config = ConfigFile.new()
     var full_path = get_config_file_path()
     
-    var error = config.load(full_path)
+    var _error = config.load(full_path)
 #	if error != OK:
 #		print("Config file loading failed: %s, error %s!" % [full_path, Globals.get_err_message(error)])
     
@@ -147,7 +147,7 @@ func reset_settings():
 
 
 func save_config(config:ConfigFile, full_path:String):
-    var error = config.save(full_path)
+    var _error = config.save(full_path)
 #	if error == OK:
 #		print("Config file saved: %s" % [full_path])
 #	else:
