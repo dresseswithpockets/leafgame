@@ -135,6 +135,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ShowcaseSettings="*res://demo/utility/showcase_settings.gd"
+InputController="*res://Game/InputController.cs"
 
 [display]
 
