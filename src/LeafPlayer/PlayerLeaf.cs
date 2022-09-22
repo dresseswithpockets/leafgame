@@ -131,8 +131,8 @@ public class PlayerLeaf : KinematicBody
     {
         var vel = _horizontalVelocity;
         vel.y = _verticalSpeed;
-        vel = MoveAndSlideWithSnap(vel, new Vector3(0, -0.1f, 0f), Vector3.Up, true);
-            
+        vel = MoveAndSlideWithSnap(vel, new Vector3(0, -0.2f, 0f), Vector3.Up, true, floorMaxAngle: 1.396263f);
+
         _horizontalVelocity = vel;
         _verticalSpeed = _horizontalVelocity.y;
         _horizontalVelocity.y = 0f;
