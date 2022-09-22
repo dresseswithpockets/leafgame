@@ -14,13 +14,7 @@ public class WindWall : Spatial
     {
         _wall = GetChild<CSGShape>(0);
         IslandCenter = GetNode<Spatial>(IslandCenterNode);
-
-        foreach (var signal in _wall.GetSignalList())
-        {
-            GD.Print(signal);
-        }
-        
-        _wall.Connect("body_entered", this, nameof(OnBodyEntered));
+        // todo? _wall.Connect("body_entered", this, nameof(OnBodyEntered));
     }
 
     private void OnBodyEntered(Node node)
