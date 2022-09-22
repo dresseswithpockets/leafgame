@@ -62,7 +62,7 @@ public class Main : Control
         _menu.SetProcessInput(false);
         await this.AwaitNextProcess();
 
-        var linearVolume = GD.Db2Linear(AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex(_busName)));
+        //var linearVolume = GD.Db2Linear(AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex(_busName)));
         
         var tween = GetTree().CreateTween();
         tween.TweenProperty(_menu, "modulate", Colors.Transparent, 1f).SetTrans(Tween.TransitionType.Linear);
