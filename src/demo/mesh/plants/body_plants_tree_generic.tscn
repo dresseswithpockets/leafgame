@@ -1,4 +1,7 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://TreeParticles/GenericTreeParticlesPass.tres" type="QuadMesh" id=1]
+[ext_resource path="res://TreeParticles/PineTreeParticlesMaterial.tres" type="Material" id=2]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 1.39586, 9.35049, -0.131978, 1.84648, 11.3782, 0.994483, 1.84648, 11.3782, 0.0933674, 0.650015, 10.2378, -0.188127, 0.720195, 9.35049, 0.769138, 1.84648, 10.0265, 0.543793, 1.39586, 11.3782, 0.769138, 0.720195, 9.35049, -0.357323, 1.84648, 11.1527, -0.131978, 1.17082, 9.35049, 0.769138, 1.84648, 10.0265, -0.131978, 1.39586, 11.3782, 0.0933674, 0.720195, 10.2518, 0.543793 )
@@ -83,6 +86,10 @@ points = PoolVector3Array( 0.945386, 7.09713, -0.132022, -0.406419, 3.49267, -0.
 
 [sub_resource type="ConvexPolygonShape" id=28]
 points = PoolVector3Array( 0.494541, 3.49267, 0.543638, -0.857021, 0.113155, -0.3573, -0.857021, 0.113155, 0.543638, 0.720085, 0.113155, -0.582535, -0.406397, 3.49267, -0.582535, 0.494541, 0.113155, 0.769182, 0.494541, 3.49267, -0.807924, -0.631632, 3.04178, 0.318404, -0.406397, 0.113155, -0.807924, -0.406397, 1.91505, 0.769182, 0.720085, 3.49267, 0.318404, 0.720085, 0.113155, 0.543638, 0.720085, 3.49267, -0.582535, 0.494541, 0.113155, -0.807924, -0.181008, 3.49267, 0.543638, -0.406397, 2.14033, -0.807924, -0.631632, 3.26706, -0.3573, 0.494541, 1.91505, 0.769182, -0.631632, 0.113155, 0.769182 )
+
+[sub_resource type="CylinderShape" id=29]
+height = 9.43034
+radius = 5.98151
 
 [node name="StaticBody" type="StaticBody"]
 
@@ -169,3 +176,16 @@ shape = SubResource( 27 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 28 )
+
+[node name="CollisionShape29" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.0157, 0 )
+shape = SubResource( 29 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.444, 0 )
+amount = 2
+lifetime = 10.0
+speed_scale = 0.5
+visibility_aabb = AABB( -7.44349, -16.7352, -7.91509, 20.2439, 21.7604, 15.8145 )
+process_material = ExtResource( 2 )
+draw_pass_1 = ExtResource( 1 )
