@@ -28,9 +28,11 @@ func _ready():
     update_translation()
 
 func _input(event : InputEvent):
-    var can_input = mouse_input == MouseInputMode.Always or \
-                    (mouse_input == MouseInputMode.CapturedOnly and \
-                     Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
+    
+#    var can_input = mouse_input == MouseInputMode.Always or \
+#                    (mouse_input == MouseInputMode.CapturedOnly and \
+#                     Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
+    var can_input = get_node("/root/InputController").CanInput and mouse_input != MouseInputMode.None
     
     if can_input and event is InputEventMouseMotion:
         input_rotation.x -= event.relative.x * rotation_speed.x * mouse_sensitivity
