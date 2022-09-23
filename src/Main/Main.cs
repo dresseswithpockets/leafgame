@@ -17,7 +17,7 @@ public class Main : Control
     private int _textIndex;
     private int _pageIndex;
 
-    private DialoguePage CurrentPage => _currentSequence.Pages[_pageIndex];
+    public DialoguePage CurrentPage => _currentSequence.Pages[_pageIndex];
     private DialogueMood CurrentMood => _currentSequence.Character.Moods[CurrentPage.Mood];
     
     [Export] private string _busName;
@@ -55,6 +55,13 @@ public class Main : Control
             p.Name += i;
             return p;
         });
+
+        // if allow input is already set to true, then assume that we want to debug the player
+        if (InputController.Instance.AllowInput)
+        {
+            _menu.SetProcessInput(false);
+            RemoveChild(_menu);
+        }
     }
 
     public async void OnPlayPressed()
