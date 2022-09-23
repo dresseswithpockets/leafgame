@@ -302,7 +302,6 @@ public class PlayerLeaf : KinematicBody
 
     private void OnWindFollowFinished()
     {
-        InputController.Instance.AllowInput = true;
         foreach (var child in GetChildren())
         {
             switch (child)
@@ -325,7 +324,95 @@ public class PlayerLeaf : KinematicBody
         _groundCameraOrbiter.Set("input_rotation",
             new Vector2(Mathf.Rad2Deg(cameraEuler.y), Mathf.Rad2Deg(cameraEuler.x)));
         _glideCamera.Set("enabled", false);
-        _windFollow = null;
         _followingWind = false;
+
+        if (_windFollow.StartsEndSequence)
+        {
+            StartEndSequence(_windFollow.EndSequence);
+        }
+        else
+        {
+            _windFollow = null;
+            InputController.Instance.AllowInput = true;
+        }
     }
+
+    private async void StartEndSequence(string sequenceName)
+    {
+        Game.Instance.PlayerSpatial.PauseControl();
+        await this.AwaitNextProcess();
+        
+        var dialogueFinished = ToSignal(Main.Instance, nameof(Main.FinishedBook));
+        Main.Instance.SetupDialogue(sequenceName);
+        Main.Instance.StartPage();
+        
+        var page = Main.Instance.CurrentPage;
+        var lastCamera = (page?.EnableCamera ?? false) ? Game.Instance.GetNode<Spatial>(page.CameraName) : null;
+        lastCamera?.Set("enabled", true);
+
+        //Main.Instance.PlayEndingAnimation();
+        if (page?.StartAnimation ?? false)
+        {
+            var animationPlayer = Game.Instance.GetNode<AnimationPlayer>(page.AnimationPlayerName);
+            animationPlayer.Play(page.AnimationName);
+        }
+        
+        while (!dialogueFinished.IsCompleted)
+        {
+            // hack: end sequence should be composed entirely of AutoNext pages
+            var newPage = Main.Instance.CurrentPage;
+            if (newPage != page)
+            {
+                page = newPage;
+                lastCamera?.Set("enabled", false);
+                if (page?.EnableCamera ?? false)
+                {
+                    lastCamera = Game.Instance.GetNode<Spatial>(page.CameraName);
+                    lastCamera.Set("enabled", true);
+                }
+                
+                if (page?.StartAnimation ?? false)
+                {
+                    var animationPlayer = Game.Instance.GetNode<AnimationPlayer>(page.AnimationPlayerName);
+                    animationPlayer.Play(page.AnimationName);
+                }
+            }
+            
+            /*if (Input.IsActionJustPressed("SkipDialogue"))
+            {
+                var newPage = Main.Instance.ContinuePage();
+                if (newPage == page) continue;
+                
+                lastCamera?.Set("enabled", false);
+                page = newPage;
+                if (page?.EnableCamera ?? false)
+                {
+                    lastCamera = Game.Instance.GetNode<Spatial>(page.CameraName);
+                    lastCamera.Set("enabled", true);
+                }
+            }*/
+
+            await this.AwaitNextProcess();
+        }
+
+        //lastCamera?.Set("enabled", false);
+        
+        /*var currentWindAudio = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Wind"));
+        var currentPlayerWindAudio = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("PlayerWind"));
+        var currentMusicAudio = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("EndingMusic"));
+        var tween = GetTree().CreateTween();
+        tween.TweenMethod(this, nameof(SetTweenWindAudio), currentWindAudio, -80f, 5f);
+        tween.Parallel().TweenMethod(this, nameof(SetTweenPlayerWindAudio), currentPlayerWindAudio, -80f, 5f);
+        tween.Parallel().TweenMethod(this, nameof(SetEndingMusicAudio), currentMusicAudio, -80f, 10f);
+        await ToSignal(tween, "finished");*/
+        
+        await this.AwaitTimer(1f);
+        Main.Instance.ShowThankYou();
+    }
+
+    private void SetTweenWindAudio(float value) => AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Wind"), value);
+    private void SetTweenPlayerWindAudio(float value) =>
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("PlayerWind"), value);
+    private void SetEndingMusicAudio(float value) =>
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("EndingMusic"), value);
 }
