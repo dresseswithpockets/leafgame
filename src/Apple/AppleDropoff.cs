@@ -7,12 +7,25 @@ public class AppleDropoff : Area
     [Export] public NodePath TargetApple;
     [Export] public bool TriggersDialogue;
     [Export] public string DialogueSequence;
+    [Export] public bool ActivatesNode;
+    [Export] public NodePath ActivationNode;
 
     private Apple _targetApple;
     private Spatial _dropOffSpatial;
+    private Spatial _activationNode;
     
     public override void _Ready()
     {
+        if (ActivationNode != null && !ActivationNode.IsEmpty())
+            _activationNode = GetNode<Spatial>(ActivationNode);
+
+        if (_activationNode != null && ActivatesNode)
+        {
+            _activationNode.Visible = false;
+            _activationNode.SetProcess(false);
+            _activationNode.SetPhysicsProcess(false);
+        }
+        
         _dropOffSpatial = GetNode<Spatial>(DropOffSpot);
         _targetApple = GetNode<Apple>(TargetApple);
         Connect("body_entered", this, nameof(OnBodyEntered));
@@ -63,5 +76,10 @@ public class AppleDropoff : Area
         
         Game.Instance.PlayerSpatial.SetCameraToCurrentCameraRotation();
         Game.Instance.PlayerSpatial.GiveControl();
+
+        if (!ActivatesNode) return;
+        _activationNode.Visible = true;
+        _activationNode.SetProcess(true);
+        _activationNode.SetPhysicsProcess(true);
     }
 }
