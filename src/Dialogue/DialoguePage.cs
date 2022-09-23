@@ -15,4 +15,11 @@ public class DialoguePage : Resource
 
     [Export] public bool EnableCamera;
     [Export] public string CameraName;
+
+    [Export] public bool StartAnimation;
+    [Export] public string AnimationPlayerName;
+    [Export] public string AnimationName;
+
+    [Export] public bool AutoNext;
+    [Export] public float AutoNextDelay;
 }
