@@ -128,9 +128,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="leafgame"
+config/name="Little Leaf"
 run/main_scene="res://Main/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://Leaf/map.png"
 
 [autoload]
 
