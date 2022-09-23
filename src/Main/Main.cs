@@ -8,6 +8,7 @@ public class Main : Control
     public static Main Instance;
     private Menu _menu;
     private Game _game;
+    private Control _thankYou;
     
     private RichTextLabel _dialogueLabel;
     private System.Random _random = new System.Random();
@@ -17,6 +18,7 @@ public class Main : Control
     private int _textIndex;
     private int _pageIndex;
 
+    public Fader ScreenFader;
     public DialoguePage CurrentPage => _currentSequence.Pages[_pageIndex];
     private DialogueMood CurrentMood => _currentSequence.Character.Moods[CurrentPage.Mood];
     
@@ -38,7 +40,11 @@ public class Main : Control
 
         _game = GetNode<Game>("%Game");
 
+        _thankYou = GetNode<Control>("%ThankYou");
+
         _dialogueLabel = GetNode<RichTextLabel>("%DialogueText");
+
+        ScreenFader = GetNode<Fader>("ScreenFader");
         
         var maxPoolSize = 1;
         foreach (var kvp in _sequences)
@@ -122,6 +128,16 @@ public class Main : Control
 
             noiseCounter += 1f / CurrentPage.NoisePeriod;
         }
+
+        if (CurrentPage.AutoNext)
+        {
+            await this.AwaitTimer(CurrentPage.AutoNextDelay);
+            _inPage = false;
+            _textIndex = 0;
+            ContinuePage();
+            return;
+        }
+        
         _inPage = false;
         _textIndex = 0;
     }
@@ -159,5 +175,15 @@ public class Main : Control
     {
         _noisePool.Release(player);
         player.Disconnect("finished", this, nameof(OnNoisePlayerFinished));
+    }
+
+    public void ShowThankYou()
+    {
+        _thankYou.Visible = true;
+    }
+
+    public void PlayEndingAnimation()
+    {
+        GetNode<AnimationPlayer>("MainEndingAnimationPlayer").Play("MainEndingAnim");
     }
 }
