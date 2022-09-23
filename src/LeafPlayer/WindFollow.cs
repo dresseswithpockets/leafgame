@@ -7,6 +7,8 @@ public class WindFollow : PathFollow
     [Export] public Curve WindVolumeCurve;
     [Export] public Curve SpeedLinesCurve;
     [Export] public float FollowTime;
+    [Export] public bool StartsEndSequence;
+    [Export] public string EndSequence;
 
     [Signal]
     public delegate void Finished();
