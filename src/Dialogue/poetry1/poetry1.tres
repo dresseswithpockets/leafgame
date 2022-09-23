@@ -5,8 +5,9 @@
 [resource]
 script = ExtResource( 1 )
 Mood = "Default"
-Speed = 15.0
+Speed = 10.0
 NoisePeriod = 2.0
-Text = "... but, who would want to leave such a serene island"
-EnableCamera = true
-CameraName = "%Island1Overhead3"
+Text = "little leaf little leaf blow away
+fallen boy fallen boy fly away"
+EnableCamera = false
+CameraName = null

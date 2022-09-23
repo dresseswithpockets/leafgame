@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://Dialogue/DialogueSequence.cs" type="Script" id=1]
+[ext_resource path="res://Dialogue/lonely1/Lonely1Character.tres" type="Resource" id=2]
+[ext_resource path="res://Dialogue/lonely1/lonely4.tres" type="Resource" id=3]
+[ext_resource path="res://Dialogue/lonely1/lonely2.tres" type="Resource" id=4]
+[ext_resource path="res://Dialogue/lonely1/lonely5.tres" type="Resource" id=5]
+[ext_resource path="res://Dialogue/lonely1/lonely1.tres" type="Resource" id=6]
+[ext_resource path="res://Dialogue/lonely1/lonely3.tres" type="Resource" id=7]
+[ext_resource path="res://Dialogue/lonely1/lonely6.tres" type="Resource" id=8]
+
+[resource]
+script = ExtResource( 1 )
+Pages = [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ) ]
+Character = ExtResource( 2 )

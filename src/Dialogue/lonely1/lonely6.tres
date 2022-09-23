@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource( 1 )
 Mood = "Default"
-Speed = 15.0
-NoisePeriod = 2.0
-Text = "... but, who would want to leave such a serene island"
+Speed = 20.0
+NoisePeriod = 3.0
+Text = "...anyways, if you want me to open it for you, go grab a golden apple from that grove yonder"
 EnableCamera = true
-CameraName = "%Island1Overhead3"
+CameraName = "%Island6Overhead1"
