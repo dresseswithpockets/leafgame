@@ -58,7 +58,8 @@ public class PlayerLeaf : KinematicBody
     private WindFollow _windFollow;
 
     public Vector3 Velocity => _gliding ? _glideVelocity : _horizontalVelocity;
-    
+    public PlayerSpatial PlayerSpatial;
+
     public override void _Ready()
     {
         _groundCamera = GetNode<Spatial>(GroundCamera);

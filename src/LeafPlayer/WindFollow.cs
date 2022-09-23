@@ -7,7 +7,6 @@ public class WindFollow : PathFollow
     [Export] public Curve WindVolumeCurve;
     [Export] public Curve SpeedLinesCurve;
     [Export] public float FollowTime;
-    [Export] public NodePath FollowingCamera;
 
     [Signal]
     public delegate void Finished();
