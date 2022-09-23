@@ -6,14 +6,18 @@ public class GuyInteractable : Spatial
     [Export] public bool StartsDialogue;
     [Export] public string DialogueSequence;
     [Export] public bool OneOff;
-
+    
     private Area _interactableArea;
     private bool _playing;
     private bool _playedOnce;
 
+    [Signal]
+    public delegate void BeginSequence();
+
     public override void _Ready()
     {
         _interactableArea = GetNode<Area>("Area");
+        Connect(nameof(BeginSequence), this, nameof(OnStartSequence));
     }
 
     public override void _Process(float delta)
@@ -24,10 +28,10 @@ public class GuyInteractable : Spatial
         if (OneOff && _playedOnce) return;
         
         _playedOnce = true;
-        StartSequence();
+        EmitSignal(nameof(BeginSequence));
     }
 
-    private async void StartSequence()
+    private async void OnStartSequence()
     {
         _playing = true;
         Game.Instance.PlayerSpatial.PauseControl();
@@ -36,13 +40,17 @@ public class GuyInteractable : Spatial
         Main.Instance.SetupDialogue(DialogueSequence);
         Main.Instance.StartPage();
         var dialogueFinished = ToSignal(Main.Instance, nameof(Dialogue.FinishedBook));
-        Spatial lastCamera = null;
+        
+        var page = Main.Instance.CurrentPage;
+        var lastCamera = (page?.EnableCamera ?? false) ? Game.Instance.GetNode<Spatial>(page.CameraName) : null;
+        lastCamera?.Set("enabled", true);
+        
         while (!dialogueFinished.IsCompleted)
         {
             if (Input.IsActionJustPressed("SkipDialogue"))
             {
                 lastCamera?.Set("enabled", false);
-                var page = Main.Instance.ContinuePage();
+                page = Main.Instance.ContinuePage();
                 if (page?.EnableCamera ?? false)
                 {
                     lastCamera = Game.Instance.GetNode<Spatial>(page.CameraName);
