@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public class Game : Spatial
 {
@@ -18,8 +19,14 @@ public class Game : Spatial
     [Export]
     private string _branchSwayAnimationName = "BranchSway";
 
+    [Export] private NodePath[] _startingNodes;
+
     [Signal]
     public delegate void BeginPlay();
+
+    private Spatial[] _startingSpatials;
+    private int _spatialIndex;
+    
 
     public override void _EnterTree()
     {
@@ -40,7 +47,12 @@ public class Game : Spatial
         
         // if allow input is already set to true, then assume that we want to debug the player
         if (InputController.Instance.AllowInput)
+        {
             PlayerSpatial.GiveControl();
+            _gameStartCamera.Set("enabled", false);
+        }
+
+        _startingSpatials = _startingNodes.Select(GetNode<Spatial>).ToArray();
     }
 
     public void StartGame()
@@ -86,17 +98,27 @@ public class Game : Spatial
 
     public override void _Process(float delta)
     {
-        if (Input.IsActionJustPressed("Debug_StartGame") && !OS.HasFeature("EXPORT"))
+        if (!Input.IsActionJustPressed("Debug_StartGame") || OS.HasFeature("EXPORT")) return;
+
+        // if the player is in control, then this input will cycle the player between starting positions
+        if (InputController.Instance.CanInput && _startingSpatials.Length > 0)
         {
-            var introPlayer = GetNode<AnimationPlayer>("SequenceIntro/IntroPlayer");
-            if (introPlayer.PlaybackActive && introPlayer.CurrentAnimation == "Intro")
-            {
-                introPlayer.PlaybackSpeed = 4;
-            }
-            else
-            {
-                StartGame();
-            }
+            _spatialIndex++;
+            if (_spatialIndex >= _startingSpatials.Length)
+                _spatialIndex = 0;
+
+            PlayerSpatial.PlayerLeaf.GlobalTranslation = _startingSpatials[_spatialIndex].GlobalTranslation;
+            return;
+        }
+
+        var introPlayer = GetNode<AnimationPlayer>("SequenceIntro/IntroPlayer");
+        if (introPlayer.PlaybackActive && introPlayer.CurrentAnimation == "Intro")
+        {
+            introPlayer.PlaybackSpeed = 4;
+        }
+        else
+        {
+            StartGame();
         }
     }
 
