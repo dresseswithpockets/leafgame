@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://MainMenu/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu/Menu.tscn" type="PackedScene" id=2]
@@ -7,9 +7,12 @@
 [ext_resource path="res://MainMenu/trioamb.wav" type="AudioStream" id=5]
 [ext_resource path="res://Dialogue/UIOverlayCamera.cs" type="Script" id=6]
 [ext_resource path="res://Dialogue/island1intro/island1intro.tres" type="Resource" id=7]
+[ext_resource path="res://Dialogue/poetry1/poetry1seq.tres" type="Resource" id=8]
 [ext_resource path="res://Dialogue/Dialogue.theme" type="Theme" id=9]
 [ext_resource path="res://Dialogue/AudioPlayer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Dialogue/house1intro/house1intro.tres" type="Resource" id=11]
+[ext_resource path="res://Dialogue/lonely1/lonely1seq.tres" type="Resource" id=12]
+[ext_resource path="res://Dialogue/lonely2/lonely2seq.tres" type="Resource" id=13]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -24,7 +27,10 @@ _busName = "Master"
 _audioPlayer = ExtResource( 10 )
 _sequences = {
 "house1intro": ExtResource( 11 ),
-"island1intro": ExtResource( 7 )
+"island1intro": ExtResource( 7 ),
+"lonely1seq": ExtResource( 12 ),
+"lonely2seq": ExtResource( 13 ),
+"poetry1seq": ExtResource( 8 )
 }
 
 [node name="Upscale" type="ViewportContainer" parent="."]
@@ -59,7 +65,6 @@ audio_listener_enable_3d = true
 
 [node name="Game" parent="Upscale/Viewport/Downscale/Viewport" instance=ExtResource( 4 )]
 unique_name_in_owner = true
-_house1DialogueSequenceName = "house1intro"
 
 [node name="Menu" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
