@@ -310,7 +310,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "class": "Greenhouse_PlantState"
 }
-plant/plant_brush_active = false
+plant/plant_brush_active = true
 plant/plant_label = "daisy"
 plant/plant = SubResource( 12323 )
 
@@ -340,7 +340,7 @@ __meta__ = {
 }
 mesh/mesh_LOD_variants = [ SubResource( 12321 ), SubResource( 12322 ) ]
 mesh/selected_for_edit_resource = SubResource( 12322 )
-mesh/mesh_LOD_max_distance = 10.0
+mesh/mesh_LOD_max_distance = 100.0
 mesh/mesh_LOD_kill_distance = -1.0
 mesh/mesh_LOD_max_capacity = 10
 mesh/mesh_LOD_min_size = 1.0
@@ -536,9 +536,9 @@ __meta__ = {
 "class": "Greenhouse_Plant"
 }
 mesh/mesh_LOD_variants = [ SubResource( 14639 ), SubResource( 14640 ) ]
-mesh/mesh_LOD_max_distance = 10.0
+mesh/mesh_LOD_max_distance = 100.0
 mesh/mesh_LOD_kill_distance = -1.0
-mesh/mesh_LOD_max_capacity = 20
+mesh/mesh_LOD_max_capacity = 10
 mesh/mesh_LOD_min_size = 1.0
 octree/octree_reconfigure_button = false
 octree/octree_recenter_button = false
@@ -803,7 +803,7 @@ mesh/mesh_LOD_variants = [ SubResource( 14657 ) ]
 mesh/selected_for_edit_resource = SubResource( 14657 )
 mesh/mesh_LOD_max_distance = 10.0
 mesh/mesh_LOD_kill_distance = 100.0
-mesh/mesh_LOD_max_capacity = 100
+mesh/mesh_LOD_max_capacity = 50
 mesh/mesh_LOD_min_size = 1.0
 octree/octree_reconfigure_button = false
 octree/octree_recenter_button = false
@@ -877,7 +877,7 @@ mesh/mesh_LOD_variants = [ SubResource( 14667 ), SubResource( 14668 ), SubResour
 mesh/selected_for_edit_resource = SubResource( 14667 )
 mesh/mesh_LOD_max_distance = 10.0
 mesh/mesh_LOD_kill_distance = -1.0
-mesh/mesh_LOD_max_capacity = 75
+mesh/mesh_LOD_max_capacity = 10
 mesh/mesh_LOD_min_size = 1.0
 octree/octree_reconfigure_button = false
 octree/octree_recenter_button = false
@@ -1157,4 +1157,4 @@ __meta__ = {
 "class": "Greenhouse"
 }
 plant_types/greenhouse_plant_states = [ SubResource( 2 ), SubResource( 214 ), SubResource( 500 ), SubResource( 12324 ), SubResource( 12326 ), SubResource( 12330 ), SubResource( 14636 ), SubResource( 14642 ), SubResource( 14646 ), SubResource( 14659 ), SubResource( 14661 ), SubResource( 14663 ), SubResource( 14665 ), SubResource( 14670 ), SubResource( 14675 ), SubResource( 14677 ), SubResource( 14686 ), SubResource( 14688 ) ]
-plant_types/selected_for_edit_resource = SubResource( 14677 )
+plant_types/selected_for_edit_resource = SubResource( 12324 )
