@@ -9,5 +9,10 @@ Speed = 10.0
 NoisePeriod = 2.0
 Text = "on this day
 little leaf tiny leaf feel the wind"
-EnableCamera = false
-CameraName = null
+EnableCamera = true
+CameraName = "%Poetry1Overhead1"
+StartAnimation = false
+AnimationPlayerName = ""
+AnimationName = ""
+AutoNext = false
+AutoNextDelay = 0.0

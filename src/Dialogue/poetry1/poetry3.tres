@@ -9,5 +9,10 @@ Speed = 10.0
 NoisePeriod = 2.0
 Text = "fallen boy fallen boy...
 ...im still thinking of the rest. Come back later."
-EnableCamera = false
-CameraName = null
+EnableCamera = true
+CameraName = "%Poetry1Overhead1"
+StartAnimation = false
+AnimationPlayerName = ""
+AnimationName = ""
+AutoNext = false
+AutoNextDelay = 0.0

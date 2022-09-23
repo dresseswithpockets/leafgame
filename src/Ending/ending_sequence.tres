@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://Dialogue/DialogueSequence.cs" type="Script" id=1]
+[ext_resource path="res://Ending/ending_character.tres" type="Resource" id=2]
+[ext_resource path="res://Ending/ending2.tres" type="Resource" id=3]
+[ext_resource path="res://Ending/ending6.tres" type="Resource" id=4]
+[ext_resource path="res://Ending/ending3.tres" type="Resource" id=5]
+[ext_resource path="res://Ending/ending7.tres" type="Resource" id=6]
+[ext_resource path="res://Ending/ending1.tres" type="Resource" id=7]
+[ext_resource path="res://Ending/ending5.tres" type="Resource" id=8]
+[ext_resource path="res://Ending/ending4.tres" type="Resource" id=9]
+
+[resource]
+script = ExtResource( 1 )
+Pages = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ) ]
+Character = ExtResource( 2 )

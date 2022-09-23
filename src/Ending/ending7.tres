@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Dialogue/DialoguePage.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+Mood = "Default"
+Speed = 15.0
+NoisePeriod = 2.0
+Text = "then we may be at peace, and leaf"
+EnableCamera = true
+CameraName = "%EndingOverhead7"
+StartAnimation = false
+AnimationPlayerName = ""
+AnimationName = ""
+AutoNext = true
+AutoNextDelay = 5.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://MainMenu/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu/Menu.tscn" type="PackedScene" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://Dialogue/house1intro/house1intro.tres" type="Resource" id=11]
 [ext_resource path="res://Dialogue/lonely1/lonely1seq.tres" type="Resource" id=12]
 [ext_resource path="res://Dialogue/lonely2/lonely2seq.tres" type="Resource" id=13]
+[ext_resource path="res://Dialogue/AbaddonThankYou.tres" type="DynamicFont" id=14]
+[ext_resource path="res://Ending/ending_sequence.tres" type="Resource" id=15]
+[ext_resource path="res://Ending/Fader.cs" type="Script" id=16]
+[ext_resource path="res://Ending/MainEndingAnim.tres" type="Animation" id=17]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -26,6 +30,7 @@ script = ExtResource( 3 )
 _busName = "Master"
 _audioPlayer = ExtResource( 10 )
 _sequences = {
+"ending": ExtResource( 15 ),
 "house1intro": ExtResource( 11 ),
 "island1intro": ExtResource( 7 ),
 "lonely1seq": ExtResource( 12 ),
@@ -70,6 +75,14 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 self_modulate = Color( 1, 1, 1, 0.894118 )
 
+[node name="ScreenFader" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+script = ExtResource( 16 )
+Alpha = 0.0
+
 [node name="DialogueView" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,6 +100,30 @@ margin_right = 3.0
 margin_bottom = 3.0
 mouse_filter = 2
 theme = ExtResource( 9 )
+
+[node name="ThankYou" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="ThankYou"]
+anchor_right = 1.0
+anchor_bottom = 0.66
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ThankYou/CenterContainer"]
+margin_left = 88.0
+margin_top = 190.0
+margin_right = 712.0
+margin_bottom = 337.0
+theme = ExtResource( 9 )
+custom_fonts/font = ExtResource( 14 )
+text = "Thank You For Playing
+(:"
+align = 1
+valign = 1
 
 [node name="MenuLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -110,3 +147,6 @@ visible = false
 cull_mask = 2
 environment = SubResource( 1 )
 script = ExtResource( 6 )
+
+[node name="MainEndingAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/MainEndingAnim = ExtResource( 17 )
