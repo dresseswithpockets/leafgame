@@ -7,6 +7,8 @@ public class WindRing : Spatial
     [Export] public bool Enabled = true;
     [Export] public bool TriggerWindPath;
     [Export] public NodePath PathFollower;
+    [Export] public bool SetsStartingId;
+    [Export] public int StartingId;
     
     private Area _area;
     private float _cooldownTimer;
@@ -32,6 +34,9 @@ public class WindRing : Spatial
         if (!(body is PlayerLeaf player)) return;
         if (_cooldownTimer > 0) return;
 
+        if (SetsStartingId)
+            Game.Instance.SetCurrentStartingPosition(StartingId);
+        
         if (TriggerWindPath && _pathFollow != null)
         {
             player.FollowWind(_pathFollow);
