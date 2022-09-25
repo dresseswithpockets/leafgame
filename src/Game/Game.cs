@@ -26,7 +26,6 @@ public class Game : Spatial
 
     private Spatial[] _startingSpatials;
     private int _spatialIndex;
-    
 
     public override void _EnterTree()
     {
@@ -129,5 +128,15 @@ public class Game : Spatial
         var targetPriority = (int)currentTarget.Get("priority");
         _gameStartCamera.Set("priority", targetPriority + 1);
         return this.AwaitTimer(transitionTime);
+    }
+
+    public void HandleBottomPlaneHit()
+    {
+        PlayerSpatial.PlayerLeaf.GlobalTranslation = _startingSpatials[_spatialIndex].GlobalTranslation;
+    }
+
+    public void SetCurrentStartingPosition(int x)
+    {
+        _spatialIndex = x;
     }
 }
